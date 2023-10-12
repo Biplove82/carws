@@ -7,7 +7,7 @@ const CreateData = async function (req, res) {
 };
 //getUserData API
 const getUserData = async function (req, res) {
-  let userId = req.params.userId;
+  let userId = req.params._id;
   let userDetails = await UserModels.findById(userId);
   if (!userDetails)
     return res.send({ status: false, msg: "No such user exists" });
