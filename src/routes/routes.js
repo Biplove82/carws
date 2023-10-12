@@ -17,7 +17,7 @@ const { userRegister, resbymobnum } = require("../Controller/AuthController");//
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
-router.get("/getUserData/:userId", getUserData); //get user by id
+router.get("/getUserData/:_id", getUserData); //get user by id
 router.put("/updateUser/:_id", updateUser); // Edit user by id
 router.post("/serviceRqst", serviceRqst); //bd is not saving in mongdb
 router.get("/getReqbyId/:_id", getReqbyId); //req for service
