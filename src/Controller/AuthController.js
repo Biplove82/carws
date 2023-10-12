@@ -32,5 +32,8 @@ res.status(200).json({msg:"registered complete"})
     res.status(500).json({msg:"Not Registered"+error})
     
   }
-}
+};
+
+
+
 module.exports={userRegister,resbymobnum}

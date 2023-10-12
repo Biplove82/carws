@@ -33,11 +33,13 @@ const updateUser = async function (req, res) {
 };
 //service Request Api
 const serviceRqst = async function (req, res) {
-  const { userName, description } = req.body;
+  const { userName, description,status } = req.body;
   try {
     const serviceRequest = new UserModels({
       userName,
       description,
+      status,
+    
     });
 
     await serviceRequest.save();
