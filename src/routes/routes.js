@@ -17,9 +17,13 @@ const {
   servicerequest,
   editservicerequest,
   approve_service,
+  not_approved_service,
+  delete_request,
+  assigne_service,
 } = require("../Controller/SupervisiorController");
 
-const { userRegister, resbymobnum } = require("../Controller/AuthController"); //controller
+const { userRegister, resbymobnum, login } = require("../Controller/AuthController"); //controller
+const { create_admin, allservicerequest, create_supervisior, editservice, deleterequest, approveservice, notapproveservice } = require("../Controller/AdminController");
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
@@ -37,11 +41,26 @@ router.post("/data", data);
 router.get("/getalluser", getalluser);
 router.get("/servicerequest/:_id", servicerequest);
 router.put("/editservicerequest/:_id", editservicerequest);
-router.get("/approve_service",approve_service);
+router.get("/approve_service", approve_service);
+router.get("/not_approved_service", not_approved_service);
+router.delete("/delete_request/:_id", delete_request);
+router.put("/assigne_service/:_id", assigne_service);
 
+
+//Admin Api
+router.post("/create_admin",create_admin);
+router.get("/allservicerequest/:_id",allservicerequest);
+router.post("/create_supervisior",create_supervisior);
+router.put("/editservice/:_id",editservice);
+router.delete("/deleterequest/:_id",deleterequest);
+router.get("/approveservice",approveservice);
+router.get("/notapproveservice",notapproveservice);
 //auth api
+
+
 
 router.post("/userRegister", userRegister);
 router.post("/resbymobnum", resbymobnum);
+router.post("/login",login);
 
 module.exports = router;

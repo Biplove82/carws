@@ -50,12 +50,66 @@ const editservicerequest = async function (req, res) {
 };
 
 //Approved service request.
-const approve_service = async function(req,res){
-    try {
-      let service= await allUser.findOne({status:"approved"});
-  res.status(200).json(service);
-    } catch (error) {
-      res.status(500).json({msg:"Service Not Found"})
-      }};
+const approve_service = async function (req, res) {
+  try {
+    let service = await allUser.findOne({ status: "approved" });
+    res.status(200).json(service);
+  } catch (error) {
+    res.status(500).json({ msg: "Service Not Found" });
+  }
+};
 
-module.exports = { getalluser, data, servicerequest,editservicerequest,approve_service };
+//Not approved request.
+
+const not_approved_service = async function (req, res) {
+  try {
+    const notapproved = await allUser.find({
+      status: { $ne: "approved", $nin: [" ", null] },
+    });
+    res.json(notapproved);
+  } catch (error) {
+    res.json({ msg: "Service not found" });
+  }
+};
+//api for delete service request.
+const delete_request = async function (req, res) {
+  try {
+    let userId = req.params._id;
+    let deleteUser = await allUser.findByIdAndDelete(userId);
+    if (!deleteUser) {
+      res.status(404).json({ msg: "User not Found" });
+    }
+    res.json({ msg: "User Delted Sucessfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "error" });
+  }
+};
+//api for assigne service.
+const assigne_service = async function (req, res) {
+  try {
+    let requestId = req.params._id;
+    let { supervisorSpecificField, userName } = req.body;
+    let update_service = await SupervisorModels.findByIdAndUpdate(
+      requestId,
+      { supervisorSpecificField, userName },
+      { new: true }
+    );
+    if (!update_service) {
+      res.status(404).json({ msg: "Service Request Not Found" });
+    }
+    res.json(update_service);
+  } catch (error) {
+    res.status(500).json({ msg: "error" });
+  }
+};
+
+module.exports = {
+  getalluser,
+  data,
+  servicerequest,
+  editservicerequest,
+  approve_service,
+  not_approved_service,
+  delete_request,
+  assigne_service,
+};

@@ -96,6 +96,8 @@ const compalint = async function (req, res) {
     res.status(500).json({ msg: "Error"+error});
   }
 };
+
+
 module.exports = {
   CreateData,
   getUserData,
