@@ -4,12 +4,13 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
 // const twilio = require("twilio")
+//
 // const client = twilio('YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN');
 // const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
 const randomstring = require("randomstring");
-const accountSid = "AC57cfa839d8a740356e34e0aca6dd368c";
-const authToken = "0833eb786e2610a08a78f8b05b6ea98b";
-const twilioPhoneNumber = "9798715576"; // Replace with your Twilio phone number
+const accountSid = "ACffb6cb2d6ca7ecbc31b02de496034c08";
+const authToken = "bd1437fbaf28bb74cda7cfedd446538a";
+const twilioPhoneNumber = "+19524666531"; // Replace with your Twilio phone number
 const client = require("twilio")(accountSid, authToken);
 
 const userRegister = async function (req, res) {
@@ -96,7 +97,7 @@ const sendotp = async function (req, res) {
     await client.messages.create({
       body: "your otp for registration:${otp}",
       from: twilioPhoneNumber,
-      to: "+1234567890",
+      to: "+919798715576",
     });
     res.json({ success: true, message: "OTP sent successfully." });
   } catch (error) {
