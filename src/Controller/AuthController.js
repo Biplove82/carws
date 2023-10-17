@@ -1,20 +1,43 @@
 const authmodels = require("../Modells/UserModels");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
+// const twilio = require("twilio")
+// const client = twilio('YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN');
+// const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
+const randomstring = require("randomstring");
+const accountSid = "AC57cfa839d8a740356e34e0aca6dd368c";
+const authToken = "0833eb786e2610a08a78f8b05b6ea98b";
+const twilioPhoneNumber = "9798715576"; // Replace with your Twilio phone number
+const client = require("twilio")(accountSid, authToken);
 
 const userRegister = async function (req, res) {
-  const { userName, passWord, role } = req.body;
+  const {
+    userName,
+    passWord,
+    role,
+    firstName,
+    surName,
+    mobileNumber,
+    alternateNumber,
+    address,
+  } = req.body;
   try {
     const existingUser = await authmodels.findOne({ userName: userName });
     if (existingUser) {
-      return res.status(400).json({ message: "Username already exists" });
+      return res.json({ message: "Username already exists" });
     }
     const hashedPassword = await bcrypt.hash(passWord, 10);
     const newUser = new authmodels({
       userName,
       passWord: hashedPassword,
       role,
+      firstName,
+      surName,
+      mobileNumber,
+      alternateNumber,
+      address,
     });
     await newUser.save();
     res.status(200).json({ msg: "User Registered Succesfully" });
@@ -59,4 +82,25 @@ const login = async function (req, res) {
   }
 };
 
-module.exports = { userRegister, resbymobnum, login };
+const sendotp = async function (req, res) {
+  const { userName } = req.body;
+  const otp = randomstring.generate({ length: 6, charset: "numeric" });
+  try {
+    let user = await authmodels.findOne({ userName });
+    if (user) {
+      user.otp;
+      await user.save();
+    } else {
+      await authmodels.create({ userName, otp });
+    }
+    await client.messages.create({
+      body: "your otp for registration:${otp}",
+      from: twilioPhoneNumber,
+      to: "+1234567890",
+    });
+    res.json({ success: true, message: "OTP sent successfully." });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to send OTP." });
+  }
+};
+module.exports = { userRegister, resbymobnum, login, sendotp };

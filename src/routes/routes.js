@@ -22,7 +22,7 @@ const {
   assigne_service,
 } = require("../Controller/SupervisiorController");
 
-const { userRegister, resbymobnum, login } = require("../Controller/AuthController"); //controller
+const { userRegister, resbymobnum, login, sendotp } = require("../Controller/AuthController"); //controller
 const { create_admin, allservicerequest, create_supervisior, editservice, deleterequest, approveservice, notapproveservice } = require("../Controller/AdminController");
 
 //user api
@@ -62,5 +62,7 @@ router.get("/notapproveservice",notapproveservice);
 router.post("/userRegister", userRegister);
 router.post("/resbymobnum", resbymobnum);
 router.post("/login",login);
+//router.post("/sendotp",sendotp)
+router.post("/sendotp",sendotp);
 
 module.exports = router;

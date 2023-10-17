@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema(
       type:String,
       default:" "
     },
+    serviceAt:{
+      type : String,default:''
+    },
 
     role: {
       type: Number,

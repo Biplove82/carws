@@ -33,13 +33,35 @@ const updateUser = async function (req, res) {
 };
 //service Request Api
 const serviceRqst = async function (req, res) {
-  const { userName, description,status } = req.body;
+  const {
+    userName,
+    description,
+    status,
+    firstName,
+    surName,
+    address,
+    paymentMode,
+    PickUp_location,
+    alternateNumber,
+    serviceAt,
+  } = req.body;
+
+  const existingUser = await UserModels.find({ userName:userName });
+  if (existingUser) {
+    return res.status(400).json({ message: "Username already exists" });
+  }
   try {
     const serviceRequest = new UserModels({
       userName,
       description,
       status,
-    
+      firstName,
+      surName,
+      address,
+      paymentMode,
+      PickUp_location,
+      alternateNumber,
+      serviceAt,
     });
 
     await serviceRequest.save();
@@ -76,9 +98,24 @@ const Delete = async function (req, res) {
 
 //api to submite feedBack
 const fedBack = async function (req, res) {
-  const { description, userName } = req.body;
+  const {
+    description,
+    userName,
+    surName,
+    address,
+    mobileNumber,
+    alternateNumber,
+    
+  } = req.body;
   try {
-    let fdback = new UserModels({ description, userName });
+    let fdback = new UserModels({
+      description,
+      userName,
+      surName,
+      mobileNumber,
+      alternateNumber,
+      address,
+    });
     await fdback.save();
     res.status(201).json({ message: "Feedback submitted successfully" });
   } catch (err) {
@@ -93,10 +130,9 @@ const compalint = async function (req, res) {
     await comp.save();
     res.send(200).json({ msg: "Complaint Registered" });
   } catch (error) {
-    res.status(500).json({ msg: "Error"+error});
+    res.status(500).json({ msg: "Error" + error });
   }
 };
-
 
 module.exports = {
   CreateData,
