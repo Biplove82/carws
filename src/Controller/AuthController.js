@@ -108,46 +108,7 @@ const sendotp = async function (req, res) {
 }
 
 
-// const userregister = async (req, res) => {
-//   try {
-//     const { role, email, password } = req.body;
 
-//     if (role && email && password) {
-//       // Check if the email already exists in the database
-//       const user = await UserModel.findOne({ email: email });
-
-//       if (user) {
-//         res.status(401).json({
-//           message: 'Email already exists.',
-//         });
-//       } else {
-//         // Hash the password and save the user to the database
-//         const hashPassword = await bcrypt.hash(password, "10");
-//         const newUser = new UserModel({
-//           role: role,
-//           email: email,
-//           password: hashPassword,
-//         });
-
-//         await newUser.save();
-
-//         res.status(201).json({
-//           message: 'Registration successful.',
-//           user: newUser,
-//         });
-//       }
-//     } else {
-//       res.status(400).json({
-//         message: 'All fields are required.',
-//       });
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({
-//       message: 'Internal server error.',
-//     });
-//   }
-// };
 
 
 
