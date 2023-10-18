@@ -1,9 +1,11 @@
 const authmodels = require("../Modells/UserModels");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
-// const twilio = require("twilio")
+
+const twilio = require("twilio")
 //
 // const client = twilio('YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN');
 // const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
@@ -27,7 +29,7 @@ const userRegister = async function (req, res) {
   try {
     // const existingUser = await authmodels.findOne({ userName: userName });
     // if (existingUser) {
-      // return res.json({ message: "Username already exists" });
+    //   return res.json({ message: "Username already exists" });
     // }
     const hashedPassword = await bcrypt.hash(passWord, 10);
     const newUser = new authmodels({
@@ -103,5 +105,50 @@ const sendotp = async function (req, res) {
   } catch (error) {
     res.status(500).json({ success: false, message: "Failed to send OTP."+error});
   }
-};
+}
+
+
+// const userregister = async (req, res) => {
+//   try {
+//     const { role, email, password } = req.body;
+
+//     if (role && email && password) {
+//       // Check if the email already exists in the database
+//       const user = await UserModel.findOne({ email: email });
+
+//       if (user) {
+//         res.status(401).json({
+//           message: 'Email already exists.',
+//         });
+//       } else {
+//         // Hash the password and save the user to the database
+//         const hashPassword = await bcrypt.hash(password, "10");
+//         const newUser = new UserModel({
+//           role: role,
+//           email: email,
+//           password: hashPassword,
+//         });
+
+//         await newUser.save();
+
+//         res.status(201).json({
+//           message: 'Registration successful.',
+//           user: newUser,
+//         });
+//       }
+//     } else {
+//       res.status(400).json({
+//         message: 'All fields are required.',
+//       });
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({
+//       message: 'Internal server error.',
+//     });
+//   }
+// };
+
+
+
 module.exports = { userRegister, resbymobnum, login, sendotp };
