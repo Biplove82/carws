@@ -65,7 +65,7 @@ const serviceRqst = async function (req, res) {
     });
 
     await serviceRequest.save();
-    res.status(201).json({id: serviceRequest._id, message: "Service request created successfully" });
+    res.status(201).json({id: serviceRequest._id, message: "Service request created successfully" });//res will be user
   } catch (error) {
     res.status(500).json({ message: "Not Created" + error });
   }
@@ -116,7 +116,7 @@ const fedBack = async function (req, res) {
       address,
     });
     await fdback.save();
-    res.status(201).send({ msg: fdback });
+    res.status(201).send({   msg: fdback });
   } catch (err) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
