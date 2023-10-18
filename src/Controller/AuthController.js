@@ -41,7 +41,7 @@ const userRegister = async function (req, res) {
       address,
     });
     await newUser.save();
-    res.status(200).json({ msg: "User Registered Succesfully" });
+    res.status(200).json({id: newUser._id, msg: "User Registered Succesfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" + error });
   }
@@ -52,7 +52,7 @@ const resbymobnum = async function (req, res) {
     let { mobileNumber, userName } = req.body;
     let data = await authmodels.findOne({ mobileNumber });
     if (data) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.json({ error: "User already exists" });
     }
     data = new authmodels({ mobileNumber, userName });
     await data.save();
@@ -101,7 +101,7 @@ const sendotp = async function (req, res) {
     });
     res.json({ success: true, message: "OTP sent successfully." });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Failed to send OTP." });
+    res.status(500).json({ success: false, message: "Failed to send OTP."+error});
   }
 };
 module.exports = { userRegister, resbymobnum, login, sendotp };

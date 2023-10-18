@@ -46,11 +46,11 @@ const serviceRqst = async function (req, res) {
     serviceAt,
   } = req.body;
 
-  const existingUser = await UserModels.find({ userName:userName });
-  if (existingUser) {
-    return res.status(400).json({ message: "Username already exists" });
-  }
   try {
+    const existingUser = await UserModels.findOne({ userName: userName });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
     const serviceRequest = new UserModels({
       userName,
       description,
@@ -65,7 +65,7 @@ const serviceRqst = async function (req, res) {
     });
 
     await serviceRequest.save();
-    res.status(201).json({ message: "Service request created successfully" });
+    res.status(201).json({id: serviceRequest._id, message: "Service request created successfully" });
   } catch (error) {
     res.status(500).json({ message: "Not Created" + error });
   }
@@ -105,7 +105,6 @@ const fedBack = async function (req, res) {
     address,
     mobileNumber,
     alternateNumber,
-    
   } = req.body;
   try {
     let fdback = new UserModels({
@@ -117,7 +116,7 @@ const fedBack = async function (req, res) {
       address,
     });
     await fdback.save();
-    res.status(201).json({ message: "Feedback submitted successfully" });
+    res.status(201).send({ msg: fdback });
   } catch (err) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
