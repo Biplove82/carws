@@ -27,10 +27,10 @@ const userRegister = async function (req, res) {
     address,
   } = req.body;
   try {
-    // const existingUser = await authmodels.findOne({ userName: userName });
-    // if (existingUser) {
-    //   return res.json({ message: "Username already exists" });
-    // }
+    const existingUser = await authmodels.findOne({ userName: userName });
+    if (existingUser) {
+      return res.status(401).json({ message: "Username already exists" });
+    }
     const hashedPassword = await bcrypt.hash(passWord, 10);
     const newUser = new authmodels({
       userName,
