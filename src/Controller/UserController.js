@@ -99,6 +99,7 @@ const Delete = async function (req, res) {
 //api to submite feedBack
 const fedBack = async function (req, res) {
   const {
+    firstName,
     description,
     userName,
     surName,
@@ -108,6 +109,7 @@ const fedBack = async function (req, res) {
   } = req.body;
   try {
     let fdback = new UserModels({
+      firstName,
       description,
       userName,
       surName,
@@ -116,7 +118,8 @@ const fedBack = async function (req, res) {
       address,
     });
     await fdback.save();
-    res.status(201).send({   msg: fdback });
+    res.status(201).json({ msg: 'Feedback submitted successfully', feedback: fdback });
+   // res.status(201).send({msg: fdback });
   } catch (err) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
