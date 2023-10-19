@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+// const route=require("./routes/routes");
 const route=require("../src/routes/routes");
 const app = express();
 const bcrypt=require("bcrypt");
@@ -25,7 +26,7 @@ mongoose
   .then(() => console.log("MongoDb is connected"))
   .catch((err) => console.log(err));
 
-  app.use("/src/routes",route)
+  app.use("/v1",route)
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Express app running on port " + (process.env.PORT || 3000));

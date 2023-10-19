@@ -22,7 +22,7 @@ const {
   assigne_service,
 } = require("../Controller/SupervisiorController");
 
-const { userRegister, resbymobnum, login, sendotp, userregister } = require("../Controller/AuthController"); //controller
+const { userRegister, resbymobnum, login, sendotp } = require("../Controller/AuthController"); //controller
 const { create_admin, allservicerequest, create_supervisior, editservice, deleterequest, approveservice, notapproveservice } = require("../Controller/AdminController");
 
 //user api
