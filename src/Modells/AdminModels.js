@@ -3,6 +3,11 @@ const AdminSchema = new mongoose.Schema(
   {
     firstName: { type: String, trim: true, default: " " },
     surName: { type: String, trim: true, default: " " },
+    userName:{
+      type :String ,
+      default:" "
+    },
+    
 
     mobileNumber: {
       type: Number,

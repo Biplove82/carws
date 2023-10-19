@@ -27,40 +27,40 @@ const { create_admin, allservicerequest, create_supervisior, editservice, delete
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
-router.get("/getUserData/:_id", getUserData); //get user by id
-router.put("/updateUser/:_id", updateUser); // Edit user by id
-router.post("/serviceRqst", serviceRqst); //bd is not saving in mongdb
-router.get("/getReqbyId/:_id", getReqbyId); //req for service
+router.get("/get-user-Data/:_id", getUserData); //get user by id
+router.put("/update-user/:_id", updateUser); // Edit user by id
+router.post("/service-request", serviceRqst); //bd is not saving in mongdb
+router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
-router.post("/fedBack", fedBack);
-router.post("/compalint", compalint);
+router.post("/feedback", fedBack);
+router.post("/complaint", compalint);
 
 //supervisor api
 
 router.post("/data", data);
-router.get("/getalluser", getalluser);
-router.get("/servicerequest/:_id", servicerequest);
-router.put("/editservicerequest/:_id", editservicerequest);
-router.get("/approve_service", approve_service);
-router.get("/not_approved_service", not_approved_service);
-router.delete("/delete_request/:_id", delete_request);
-router.put("/assigne_service/:_id", assigne_service);
+router.get("/get-all-user", getalluser);
+router.get("/service-request/:_id", servicerequest);
+router.put("/edit-service-request/:_id", editservicerequest);
+router.get("/approve-service", approve_service);
+router.get("/not-approved-service", not_approved_service);
+router.delete("/delete-request/:_id", delete_request);
+router.put("/assigne-service/:_id", assigne_service);
 
 
 //Admin Api
-router.post("/create_admin",create_admin);
-router.get("/allservicerequest/:_id",allservicerequest);
-router.post("/create_supervisior",create_supervisior);
+router.post("/create-admin",create_admin);
+router.get("/all-service-request/:_id",allservicerequest);
+router.post("/create-supervisior",create_supervisior);
 router.put("/editservice/:_id",editservice);
-router.delete("/deleterequest/:_id",deleterequest);
-router.get("/approveservice",approveservice);
-router.get("/notapproveservice",notapproveservice);
+router.delete("/delete-request/:_id",deleterequest);
+router.get("/approve-service",approveservice);
+router.get("/not-approve-service",notapproveservice);
 //auth api
 
 
 
-router.post("/userRegister", userRegister);
-router.post("/resbymobnum", resbymobnum);
+router.post("/user-register", userRegister);
+router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login",login);
 //router.post("/sendotp",sendotp)
 router.post("/sendotp",sendotp);

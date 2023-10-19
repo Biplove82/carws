@@ -86,7 +86,7 @@ const login = async function (req, res) {
 };
 
 const sendotp = async function (req, res) {
-  const { userName } = req.body;
+  const { userName,mobileNumber } = req.body;
   const otp = randomstring.generate({ length: 6, charset: "numeric" });
   try {
     let user = await authmodels.findOne({ userName });

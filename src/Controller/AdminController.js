@@ -3,13 +3,13 @@ const supermodel = require("../Modells/SupervisorModels");
 const adminmodel = require("../Modells/AdminModels");
 
 const create_admin = async function (req, res) {
-  const { firstName, surName, mobileNumber } = req.body;
+  const {  mobileNumber,userName } = req.body;
   try {
     let existAdmin = await adminmodel.findOne({ mobileNumber });
     if (existAdmin) {
       res.status(400).json({ msg: " Admin Already Exists" });
     }
-    let newadmin = new adminmodel({ firstName, surName, mobileNumber });
+    let newadmin = new adminmodel({ userName, mobileNumber });
     await newadmin.save();
     res.status(200).json({ msg: "Admin created Sucessfully" });
   } catch (error) {
