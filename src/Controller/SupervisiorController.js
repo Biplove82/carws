@@ -9,9 +9,12 @@ const data = async function (req, res) {
 };
 //api for all  service request user entery enter by user.
 const getalluser = async function (req, res) {
-  let pages=req.query.pages
+  let pages = req.query.pages;
   try {
-    let user = await allUser.find().skip(10*(pages-1)).limit(10);//pagination 0f 10 user detail.
+    let user = await allUser
+      .find()
+      .skip(10 * (pages - 1))
+      .limit(10); //pagination 0f 10 user detail.
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ msg: "Data Not Found" });
@@ -52,8 +55,12 @@ const editservicerequest = async function (req, res) {
 
 //Approved service request.
 const approve_service = async function (req, res) {
+  let pages = req.query.params;
   try {
-    let service = await allUser.findOne({ status: "approved" });
+    let service = await allUser
+      .findOne({ status: "approved" })
+      .skip(10 * (pages - 1))
+      .limit(10);
     res.status(200).json(service);
   } catch (error) {
     res.status(500).json({ msg: "Service Not Found" });
@@ -63,10 +70,14 @@ const approve_service = async function (req, res) {
 //Not approved request.
 
 const not_approved_service = async function (req, res) {
+  let pages = req.query.params;
   try {
-    const notapproved = await allUser.find({
-      status: { $ne: "approved", $nin: [" ", null] },
-    });
+    const notapproved = await allUser
+      .find({
+        status: { $ne: "approved", $nin: [" ", null] },
+      })
+      .skip(10 * (pages - 1))
+      .limit(10);
     res.json(notapproved);
   } catch (error) {
     res.json({ msg: "Service not found" });
