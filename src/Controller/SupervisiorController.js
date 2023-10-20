@@ -7,10 +7,11 @@ const data = async function (req, res) {
   let data1 = await SupervisorModels.create(d);
   res.send({ msg: data1 });
 };
-//api for all  service request user entery
+//api for all  service request user entery enter by user.
 const getalluser = async function (req, res) {
+  let pages=req.query.pages
   try {
-    let user = await allUser.find({});
+    let user = await allUser.find().skip(10*(pages-1)).limit(10);//pagination 0f 10 user detail.
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ msg: "Data Not Found" });

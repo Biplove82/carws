@@ -22,8 +22,21 @@ const {
   assigne_service,
 } = require("../Controller/SupervisiorController");
 
-const { userRegister, resbymobnum, login, sendotp } = require("../Controller/AuthController"); //controller
-const { create_admin, allservicerequest, create_supervisior, editservice, deleterequest, approveservice, notapproveservice } = require("../Controller/AdminController");
+const {
+  userRegister,
+  resbymobnum,
+  login,
+  sendotp,
+} = require("../Controller/AuthController"); //controller
+const {
+  create_admin,
+  allservicerequest,
+  create_supervisior,
+  editservice,
+  deleterequest,
+  approveservice,
+  notapproveservice,
+} = require("../Controller/AdminController");
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
@@ -46,24 +59,21 @@ router.get("/not-approved-service", not_approved_service);
 router.delete("/delete-request/:_id", delete_request);
 router.put("/assigne-service/:_id", assigne_service);
 
-
 //Admin Api
-router.post("/create-admin",create_admin);
-router.get("/all-service-request/:_id",allservicerequest);
-router.post("/create-supervisior",create_supervisior);
-router.put("/editservice/:_id",editservice);
-router.delete("/delete-request/:_id",deleterequest);
-router.get("/approve-service",approveservice);
-router.get("/not-approve-service",notapproveservice);
+router.post("/create-admin", create_admin);
+router.get("/all-service-request/:_id", allservicerequest);
+router.post("/create-supervisior", create_supervisior);
+router.put("/editservice/:_id", editservice);
+router.delete("/delete-request/:_id", deleterequest);
+router.get("/approve-service", approveservice);
+router.get("/not-approve-service", notapproveservice);
+
 //auth api
-
-
-
 router.post("/user-register", userRegister);
 router.post("/res-by-mobile-num", resbymobnum);
-router.post("/login",login);
+router.post("/login", login);
 //router.post("/sendotp",sendotp)
-router.post("/sendotp",sendotp);
+router.post("/sendotp", sendotp);
 // router.post("/userregister",userregister);
 
 module.exports = router;
