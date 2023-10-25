@@ -56,7 +56,7 @@ router.get("/get-all-user", getalluser);
 router.get("/service-request/:_id", servicerequest);
 router.put("/edit-service-request/:_id", editservicerequest);
 router.get("/approve-service", approve_service);
-router.get("/not-approved-service", not_approved_service);
+// router.get("/not-approved-service", not_approved_service);
 router.delete("/delete-request/:_id", delete_request);
 router.put("/assigne-service/:_id", assigne_service);
 

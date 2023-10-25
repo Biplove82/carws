@@ -1,7 +1,7 @@
 const SupervisorModels = require("../Modells/SupervisorModels");
 const allUser = require("../Modells/UserModels");
 const admin = require("../Modells/AdminModels");
-//supervisior create
+const servicereq = require("../Modells/serviceRequestModels");
 const data = async function (req, res) {
   let d = req.body;
   let data1 = await SupervisorModels.create(d);
@@ -55,13 +55,25 @@ const editservicerequest = async function (req, res) {
 
 //Approved service request.
 const approve_service = async function (req, res) {
+  let { status } = req.body;
   let pages = req.query.params;
   try {
-    let service = await allUser
-      .findOne({ status: "approved" })
+    let service = await servicereq
+      .find({ status })
       .skip(10 * (pages - 1))
       .limit(10);
-    res.status(200).json(service);
+    if (status == 1) {
+      res.status(200).json({ msg: "Service is Approved", service: service });
+    }
+    if (status == 0) {
+      res
+        .status(200)
+        .json({ msg: "Service is Not Approved", service: service });
+    }
+    if (status == -1) {
+      res.status(200).json({ msg: "Service is Rejected", service: service });
+    }
+    
   } catch (error) {
     res.status(500).json({ msg: "Service Not Found" });
   }
@@ -69,20 +81,20 @@ const approve_service = async function (req, res) {
 
 //Not approved request.
 
-const not_approved_service = async function (req, res) {
-  let pages = req.query.params;
-  try {
-    const notapproved = await allUser
-      .find({
-        status: { $ne: "approved", $nin: [" ", null] },
-      })
-      .skip(10 * (pages - 1))
-      .limit(10);
-    res.json(notapproved);
-  } catch (error) {
-    res.json({ msg: "Service not found" });
-  }
-};
+// const not_approved_service = async function (req, res) {
+//   let pages = req.query.params;
+//   try {
+//     const notapproved = await allUser
+//       .find({
+//         status: { $ne:0, $nin: [" ", null] },
+//       })
+//       .skip(10 * (pages - 1))
+//       .limit(10);
+//     res.json(notapproved);
+//   } catch (error) {
+//     res.json({ msg: "Service not found" });
+//   }
+// };
 //api for delete service request.
 const delete_request = async function (req, res) {
   try {
@@ -121,7 +133,7 @@ module.exports = {
   servicerequest,
   editservicerequest,
   approve_service,
-  not_approved_service,
+
   delete_request,
   assigne_service,
 };

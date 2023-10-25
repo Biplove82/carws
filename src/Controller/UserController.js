@@ -1,4 +1,5 @@
 const UserModels = require("../Modells/UserModels");
+const srvcModels = require("../Modells/serviceRequestModels");
 
 const CreateData = async function (req, res) {
   let Data = req.body;
@@ -35,7 +36,8 @@ const updateUser = async function (req, res) {
 const serviceRqst = async function (req, res) {
   const {
     userName,
-    description,
+     serviceType,
+    
     status,
     firstName,
     surName,
@@ -47,13 +49,13 @@ const serviceRqst = async function (req, res) {
   } = req.body;
 
   try {
-    const existingUser = await UserModels.findOne({ userName: userName });
+    const existingUser = await srvcModels.findOne({ userName: userName });
     if (existingUser) {
       return res.status(400).json({ message: "Username already exists" });
     }
-    const serviceRequest = new UserModels({
+    const serviceRequest = new srvcModels({
       userName,
-      description,
+      serviceType,
       status,
       firstName,
       surName,
