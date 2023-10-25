@@ -23,12 +23,13 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    status:{
-      type:String,
-      default:" "
+    status: {
+      type: String,
+      default: " ",
     },
-    serviceAt:{
-      type : String,default:''
+    serviceAt: {
+      type: String,
+      default: "",
     },
 
     role: {

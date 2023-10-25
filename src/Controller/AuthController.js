@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
 
-const twilio = require("twilio")
+const twilio = require("twilio");
 //
 // const client = twilio('YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN');
 // const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
@@ -43,7 +43,9 @@ const userRegister = async function (req, res) {
       address,
     });
     await newUser.save();
-    res.status(200).json({id: newUser._id, msg: "User Registered Succesfully" });
+    res
+      .status(200)
+      .json({ id: newUser._id, msg: "User Registered Succesfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" + error });
   }
@@ -86,7 +88,7 @@ const login = async function (req, res) {
 };
 
 const sendotp = async function (req, res) {
-  const { userName,mobileNumber } = req.body;
+  const { userName, mobileNumber } = req.body;
   const otp = randomstring.generate({ length: 6, charset: "numeric" });
   try {
     let user = await authmodels.findOne({ userName });
@@ -97,19 +99,60 @@ const sendotp = async function (req, res) {
       await authmodels.create({ userName, otp });
     }
     await client.messages.create({
-      body: "your otp for registration:${otp}",
+      body: "your otp for registration: ${otp}",
       from: twilioPhoneNumber,
       to: "+919798715576",
     });
     res.json({ success: true, message: "OTP sent successfully." });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Failed to send OTP."+error});
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to send OTP." + error });
   }
-}
+};
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'Jalandhar16092000@gmail.com',
+    pass: 'Alice9358',
+  },
+});
+
+// const forgetpass=async function(req,res){
+//   try {
+//     let {userName}=req.body;
+//     let user=await authmodels.findOne({userName})
+//     if(!user){
+//       return res.status(422).send("User not found");
+//     }
+  
+//     // Generate a new password and save it in the database
+//   // Generate reset token and set expiration time (1 hour)
+//   const resetToken = jwt.sign({ userName }, 'your_secret_key', { expiresIn: '1h' });
+//   user.resetToken = resetToken;
+//   user.resetTokenExpiration = Date.now() + 3600000; // 1 houre
+// await user.save();
+//  // Send reset password email to the user
+//  console.log(user);
+//  const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+//  const mailOptions = {
+//    from: 'Jalandhar16092000@gmail.com',
+//    to: userName,
+//    subject: 'Reset Password',
+//    html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`,
+//  };
+
+//     // Send an email with the generated password
+//     transporter.sendMail(mailOptions, (error, info) => {
+//       if (error) {
+//         return res.status(500).json({ message: 'Email not sent' });
+//       }
+//       return res.status(200).json({ message: 'Email sent successfully' });
+//     });
+//   }
+  
 
 
 
-
-
-
-module.exports = { userRegister, resbymobnum, login, sendotp };
+module.exports = { userRegister, resbymobnum, login, sendotp}

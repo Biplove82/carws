@@ -17,13 +17,13 @@ const create_admin = async function (req, res) {
   }
 };
 const create_supervisior = async function (req, res) {
-  const { userName, mobileNumber,firstName,surName,address,price, service} = req.body;
+  const { userName, mobileNumber,firstName,surName,address,price, service,createUsername,confirmPassword} = req.body;
   try {
     let existSupervisior = await supermodel.findOne({ mobileNumber });
     if (existSupervisior) {
       res.status(400).json({ msg: " Supervisor already exists" });
     }
-    let newsup = new supermodel({ userName, mobileNumber,firstName,surName,address,price, service });
+    let newsup = new supermodel({ userName, mobileNumber,firstName,surName,address,price, service,createUsername,confirmPassword});
     await newsup.save();
     res.status(200).json({ msg: "Supervisor Created Successfully", supervisior:newsup});
   } catch (error) {

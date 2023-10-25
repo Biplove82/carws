@@ -27,6 +27,7 @@ const {
   resbymobnum,
   login,
   sendotp,
+  forgetpass,
 } = require("../Controller/AuthController"); //controller
 const {
   create_admin,
@@ -74,6 +75,6 @@ router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
 //router.post("/sendotp",sendotp)
 router.post("/sendotp", sendotp);
-// router.post("/userregister",userregister);
+// router.post("/forget",forgetpass);
 
 module.exports = router;
