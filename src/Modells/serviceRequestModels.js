@@ -11,6 +11,10 @@ const serreqschema = new mongoose.Schema(
       state: { type: String, trim: true, default: " " },
       pincode: { type: Number, trim: true, default: " " },
     },
+    addedBy: {
+      type: String,
+      default:" ",
+    },
 
     userName: {
       type: String,
