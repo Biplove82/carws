@@ -1,11 +1,12 @@
 const serviceModells=require("../Modells/serviceModels");
 const servicerequest=require("../Modells/serviceRequestModels");
+const srvmodellsa=require("../Modells/srvcModells");
 
 //get all Requested service.
 const getallsrvcDetail=async function(req,res){
   try {
     let pages=req.query.params;
-    let srvc=await servicerequest.find()
+    let srvc=await srvmodellsa.find()
     .skip(10*(pages-1)).limit(10);
     res.send({msg:"ALL requested Services",srvc:srvc})
     
@@ -33,7 +34,17 @@ const createsubact=async function(req,res){
     res.status({msg:"Data not Created"})
   }
 }
-
+const createservice=async function(req,res){
+  try {
+    let data=req.body;
+    let nwdata= await srvmodellsa.create(data);
+    res.send({msg:nwdata});
+    
+  } catch (error) {
+    res.send({msg:"Data not created"})
+    
+  }
+}
 module.exports={
-  getallsrvcDetail,serviceSubCategory,createsubact
+  getallsrvcDetail,serviceSubCategory,createsubact,createservice
 }

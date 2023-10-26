@@ -10,26 +10,26 @@ const serviceSchema = new mongoose.Schema(
       type :String ,
       default:" ",
     },
-    mobileNumber: {
-      type: Number,
-      default: 0,
-    },
-    status: {
-      type: String,
-      default: " ",
-    },
-    serviceAt: {
-      type: String,
-      default: "",
-    },
-    paymentMode: {
-      type: String,
-      default: " ",
-    },
-    serviceType: {
-      type: String,
-      default: " ",
-    },
+    // mobileNumber: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // status: {
+    //   type: String,
+    //   default: " ",
+    // },
+    // serviceAt: {
+    //   type: String,
+    //   default: "",
+    // },
+    // paymentMode: {
+    //   type: String,
+    //   default: " ",
+    // },
+    // serviceType: {
+    //   type: String,
+    //   default: " ",
+    // },
   },
   { timestamps: true }
 );

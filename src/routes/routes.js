@@ -9,7 +9,6 @@ const {
   getUserData,
   fedBack,
   compalint,
-  
 } = require("../Controller/UserController");
 
 const {
@@ -39,8 +38,13 @@ const {
   approveservice,
   notapproveservice,
 } = require("../Controller/AdminController");
-const{ getAllserviceAdded, getallsrvcDetail, serviceSubCategory, createsubact, }= require("../Controller/ServiceController")
-
+const {
+  getAllserviceAdded,
+  getallsrvcDetail,
+  serviceSubCategory,
+  createsubact,
+  createservice,
+} = require("../Controller/ServiceController");
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
@@ -53,13 +57,12 @@ router.post("/feedback", fedBack);
 router.post("/complaint", compalint);
 // router.get("/get-all-service-added",getAllserviceAdded);
 
-
-
 //Service api
 // router.get('/get-all-services',getAllserviceAdded),
-router.get("/get-all-service-request",getallsrvcDetail);
-router.get("/select-sub-category",serviceSubCategory);
-router.post("/crate-sub-category",createsubact);
+router.get("/get-all-service-request", getallsrvcDetail);
+router.get("/select-sub-category", serviceSubCategory);
+router.post("/create-sub-category", createsubact);
+router.post("/create-data",createservice )
 
 //supervisor api
 

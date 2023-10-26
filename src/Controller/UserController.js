@@ -69,12 +69,10 @@ const serviceRqst = async function (req, res) {
     });
 
     await serviceRequest.save();
-    res
-      .status(201)
-      .json({
-        id: serviceRequest._id,
-        message: "Service request created successfully",
-      }); //res will be user
+    res.status(201).json({
+      id: serviceRequest._id,
+      message: "Service request created successfully",
+    }); //res will be user
   } catch (error) {
     res.status(500).json({ message: "Not Created" + error });
   }
@@ -91,7 +89,6 @@ const getReqbyId = async function (req, res) {
   }
 };
 //get all service add to db
-
 
 //Delete Api
 const Delete = async function (req, res) {
@@ -158,5 +155,4 @@ module.exports = {
   Delete,
   fedBack,
   compalint,
-  
 };
