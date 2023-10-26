@@ -45,6 +45,13 @@ const createservice=async function(req,res){
     
   }
 }
+const getservice=async function(req,res){
+try {let srv= await srvmodellsa.find()
+  res.send({msg:"ALL service ",srv:srv})
+  
+} catch (error) {
+  res.send({msg:"Service not Found"})
+}}
 module.exports={
-  getallsrvcDetail,serviceSubCategory,createsubact,createservice
+  getallsrvcDetail,serviceSubCategory,createsubact,createservice,getservice
 }

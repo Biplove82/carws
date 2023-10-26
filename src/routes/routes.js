@@ -44,6 +44,7 @@ const {
   serviceSubCategory,
   createsubact,
   createservice,
+  getservice,
 } = require("../Controller/ServiceController");
 
 //user api
@@ -59,11 +60,11 @@ router.post("/complaint", compalint);
 
 //Service api
 // router.get('/get-all-services',getAllserviceAdded),
-router.get("/get-all-service-request", getallsrvcDetail);
+//router.get("/get-all-service-request", getallsrvcDetail);
 router.get("/select-sub-category", serviceSubCategory);
 router.post("/create-sub-category", createsubact);
 router.post("/create-data",createservice )
-
+router.get("/get-all-service",getservice);
 //supervisor api
 
 router.post("/data", data);
