@@ -36,8 +36,8 @@ const updateUser = async function (req, res) {
 const serviceRqst = async function (req, res) {
   const {
     userName,
-     serviceType,
-    
+    serviceType,
+
     status,
     firstName,
     surName,
@@ -67,7 +67,12 @@ const serviceRqst = async function (req, res) {
     });
 
     await serviceRequest.save();
-    res.status(201).json({id: serviceRequest._id, message: "Service request created successfully" });//res will be user
+    res
+      .status(201)
+      .json({
+        id: serviceRequest._id,
+        message: "Service request created successfully",
+      }); //res will be user
   } catch (error) {
     res.status(500).json({ message: "Not Created" + error });
   }
@@ -83,6 +88,8 @@ const getReqbyId = async function (req, res) {
     res.status(500).json({ msg: "Service Request not found" + err });
   }
 };
+//get all service add to db
+
 
 //Delete Api
 const Delete = async function (req, res) {
@@ -120,8 +127,10 @@ const fedBack = async function (req, res) {
       address,
     });
     await fdback.save();
-    res.status(201).json({ msg: 'Feedback submitted successfully', feedback: fdback });
-   // res.status(201).send({msg: fdback });
+    res
+      .status(201)
+      .json({ msg: "Feedback submitted successfully", feedback: fdback });
+    // res.status(201).send({msg: fdback });
   } catch (err) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
@@ -147,4 +156,5 @@ module.exports = {
   Delete,
   fedBack,
   compalint,
+  
 };

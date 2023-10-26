@@ -9,6 +9,7 @@ const {
   getUserData,
   fedBack,
   compalint,
+  
 } = require("../Controller/UserController");
 
 const {
@@ -38,6 +39,8 @@ const {
   approveservice,
   notapproveservice,
 } = require("../Controller/AdminController");
+const{ getAllserviceAdded, getallsrvcDetail, serviceSubCategory, createsubact, }= require("../Controller/ServiceController")
+
 
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
@@ -48,6 +51,15 @@ router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
 router.post("/feedback", fedBack);
 router.post("/complaint", compalint);
+// router.get("/get-all-service-added",getAllserviceAdded);
+
+
+
+//Service api
+// router.get('/get-all-services',getAllserviceAdded),
+router.get("/get-all-service-request",getallsrvcDetail);
+router.get("/select-sub-category",serviceSubCategory);
+router.post("/crate-sub-category",createsubact);
 
 //supervisor api
 
