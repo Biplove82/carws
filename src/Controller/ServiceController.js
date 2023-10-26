@@ -45,6 +45,7 @@ const createservice=async function(req,res){
     
   }
 }
+//get al service
 const getservice=async function(req,res){
 try {let srv= await srvmodellsa.find()
   res.send({msg:"ALL service ",srv:srv})
