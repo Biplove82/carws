@@ -37,6 +37,7 @@ const serviceRqst = async function (req, res) {
   const {
     userName,
     serviceType,
+    addedBy,
 
     status,
     firstName,
@@ -56,6 +57,7 @@ const serviceRqst = async function (req, res) {
     const serviceRequest = new srvcModels({
       userName,
       serviceType,
+      addedBy,
       status,
       firstName,
       surName,
