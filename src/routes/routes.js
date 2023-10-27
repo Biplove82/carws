@@ -45,6 +45,8 @@ const {
   createsubact,
   createservice,
   getservice,
+  cartype,
+  getcartype,
 } = require("../Controller/ServiceController");
 
 //user api
@@ -56,15 +58,15 @@ router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
 router.post("/feedback", fedBack);
 router.post("/complaint", compalint);
-// router.get("/get-all-service-added",getAllserviceAdded);
 
 //Service api
-// router.get('/get-all-services',getAllserviceAdded),
-//router.get("/get-all-service-request", getallsrvcDetail);
+
 router.get("/select-sub-category", serviceSubCategory);
 router.post("/create-sub-category", createsubact);
-router.post("/create-data",createservice )
-router.get("/get-all-service",getservice);
+router.post("/create-data", createservice);
+router.get("/get-all-service", getservice);
+router.post("/car-create",cartype);
+router.get("/get-cartype",getcartype);
 //supervisor api
 
 router.post("/data", data);
@@ -72,7 +74,7 @@ router.get("/get-all-user", getalluser);
 router.get("/service-request/:_id", servicerequest);
 router.put("/edit-service-request/:_id", editservicerequest);
 router.get("/approve-service", approve_service);
-// router.get("/not-approved-service", not_approved_service);
+
 router.delete("/delete-request/:_id", delete_request);
 router.put("/assigne-service/:_id", assigne_service);
 
@@ -89,7 +91,7 @@ router.get("/not-approve-service", notapproveservice);
 router.post("/user-register", userRegister);
 router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
-//router.post("/sendotp",sendotp)
+
 router.post("/sendotp", sendotp);
 // router.post("/forget",forgetpass);
 
