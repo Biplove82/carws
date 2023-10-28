@@ -49,6 +49,9 @@ const {
   getcartype,
 } = require("../Controller/ServiceController");
 
+
+const{ transactionData, getTransdetail, getunsucesspay }=require("../Controller/TransactionController");
+const { create } = require("../Modells/TransactionModels");
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
 router.get("/get-user-Data/:_id", getUserData); //get user by id
@@ -93,6 +96,14 @@ router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
 
 router.post("/sendotp", sendotp);
-// router.post("/forget",forgetpass);
 
+
+
+
+
+//transcation api
+// router.post("create-trans", transactionData);
+router.post("/createTrans", transactionData );
+router.get("/get-sucessfuly-payment",getTransdetail);
+router.get("/get-unsucessful-payment",getunsucesspay)
 module.exports = router;

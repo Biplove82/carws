@@ -58,6 +58,7 @@ const cartype=async function(req,res){
     res.send({msg:"car type not created "})
   }
 };
+
 const getcartype=async function(req,res){
   try {
     let c = await carmodells.find()
