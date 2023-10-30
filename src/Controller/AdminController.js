@@ -1,6 +1,7 @@
 const usermodel = require("../Modells/UserModels");
 const supermodel = require("../Modells/SupervisorModels");
 const adminmodel = require("../Modells/AdminModels");
+// const { AwsContextImpl } = require("twilio/lib/rest/accounts/v1/credential/aws");
 
 const create_admin = async function (req, res) {
   const {  mobileNumber,userName } = req.body;
@@ -14,8 +15,11 @@ const create_admin = async function (req, res) {
     res.status(200).json({ msg: "Admin created Sucessfully" });
   } catch (error) {
     res.status(500).json({ msg: "Failed to create admin" });
+
   }
 };
+
+
 //create supervisior
 const create_supervisior = async function (req, res) {
   const { userName, mobileNumber,firstName,surName,address,price, service,createUsername,confirmPassword} = req.body;
@@ -44,6 +48,17 @@ const allservicerequest = async function (req, res) {
     res.status(500).json({ msg: "User Detail Not Found" });
   }
 };
+const getsupevisior=async function(req,res){
+  let pages=req.query.params;
+  try {
+    let supervisior= await supermodel.find().skip(10 * (pages - 1))
+    .limit(10);
+    res.send({msg:"supervosior",supervisior});
+
+  } catch (error) {
+    res.send({msg:"Supervisior not found"});
+  }
+}
 
 //edit supervisior
 const editservice = async function (req, res) {
@@ -107,4 +122,5 @@ module.exports = {
   deleterequest,
   approveservice,
   notapproveservice,
+  getsupevisior,
 };

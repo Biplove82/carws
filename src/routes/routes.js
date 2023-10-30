@@ -37,6 +37,7 @@ const {
   deleterequest,
   approveservice,
   notapproveservice,
+  getsupevisior,
 } = require("../Controller/AdminController");
 const {
   getAllserviceAdded,
@@ -92,6 +93,7 @@ router.put("/edit-supervisior/:_id", editservice);
 router.delete("/delete-request/:_id", deleterequest);
 router.get("/approve-service", approveservice);
 router.get("/not-approve-service", notapproveservice);
+router.get("/get-all-supervisior",getsupevisior);
 
 //auth api
 router.post("/user-register", userRegister);
