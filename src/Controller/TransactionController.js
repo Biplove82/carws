@@ -10,7 +10,7 @@ const transactionData = async function (req, res) {
   }
 };
 const getTransdetail = async function (req, res) {
-  let pages = req.query.params;
+  let pages = req.query.pages;
   try {
     let service = await transcModells
       .find({
@@ -25,7 +25,7 @@ const getTransdetail = async function (req, res) {
   }
 };
 const getunsucesspay = async function (req, res) {
-  let pages = req.query.params;
+  let pages = req.query.pages;
   try {
     let service = await transcModells
       .find({

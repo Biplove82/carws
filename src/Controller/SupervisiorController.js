@@ -57,7 +57,7 @@ const editservicerequest = async function (req, res) {
 //Approved service request.
 const approve_service = async function (req, res) {
   let { status } = req.body;
-  let pages = req.query.params;
+  let pages = req.query.pages;
   try {
     let service = await servicereq
       .find({ status })

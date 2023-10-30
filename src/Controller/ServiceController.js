@@ -6,7 +6,7 @@ const carmodells= require("../Modells/CarModells");
 
 const serviceSubCategory = async function (req, res) {
   try {
-    let pages = req.query.params;
+    let pages = req.query.pages;
     let subcat = await serviceModells
       .find()
       .skip(10 * (pages - 1))

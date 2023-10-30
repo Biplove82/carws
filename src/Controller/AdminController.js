@@ -49,9 +49,9 @@ const allservicerequest = async function (req, res) {
   }
 };
 const getsupevisior=async function(req,res){
-  // let pages=req.query.params;
+   let pages=req.query.pages;
   try {
-    let supervisior= await supermodel.find( )
+    let supervisior= await supermodel.find( ).skip(10*(pages-1)).limit(10);
     res.send({msg:"supervosior",supervisior});
 
   } catch (error) {
