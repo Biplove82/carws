@@ -35,7 +35,7 @@ const SupervisorSchema = new mongoose.Schema({
   },
   service: {
     type: String,
-    default: "",
+    default: " ",
   },
 
   mobileNumber: { type: Number, default: 0 },
@@ -53,5 +53,5 @@ const SupervisorSchema = new mongoose.Schema({
     state: { type: String, trim: true, default: " " },
     pincode: { type: Number, trim: true, default: " " },
   },
-});
+},{timestamps:true});
 module.exports = mongoose.model("supervisor", SupervisorSchema);
