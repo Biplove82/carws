@@ -85,7 +85,7 @@ router.put("/assigne-service/:_id", assigne_service);
 router.post("/create-admin", create_admin);
 router.get("/all-service-request/:_id", allservicerequest);
 router.post("/create-supervisior", create_supervisior);
-router.put("/editservice/:_id", editservice);
+router.put("/edit-supervisior/:_id", editservice);
 router.delete("/delete-request/:_id", deleterequest);
 router.get("/approve-service", approveservice);
 router.get("/not-approve-service", notapproveservice);

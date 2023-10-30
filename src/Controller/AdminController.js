@@ -50,7 +50,7 @@ const editservice = async function (req, res) {
     let id = req.params._id;
     let updateservice = req.body;
 
-    let updaterequest = await usermodel.findByIdAndUpdate(id, updateservice, {
+    let updaterequest = await supermodel.findByIdAndUpdate(id, updateservice, {
       new: true,
     });
     if (!updaterequest) {

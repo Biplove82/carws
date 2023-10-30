@@ -27,14 +27,14 @@ const getTransdetail = async function (req, res) {
 const getunsucesspay = async function (req, res) {
   let pages = req.query.params;
   try {
-    let ser = await transcModells
+    let service = await transcModells
       .find({
         paymentStatus: "unsucessful",
       })
       .populate("viewDetail")
       .skip(10 * (pages - 1))
       .limit(10);
-    res.send({ msg: "Unsuccessful Payment", ser });
+    res.send({ msg: "Unsuccessful Payment", service });
   } catch (error) {
     res.send({ msg: "Error" });
   }

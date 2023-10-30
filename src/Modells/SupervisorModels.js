@@ -11,6 +11,10 @@ const SupervisorSchema = new mongoose.Schema({
     type: String,
     default: " ",
   },
+  altenateNumber:{
+    type :String ,
+    default:' ',
+  },
   userName: { type: String, default: " " },
   password: { type: String, default: " " },
   confirmPassword: {

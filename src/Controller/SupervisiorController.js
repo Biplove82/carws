@@ -2,6 +2,7 @@ const SupervisorModels = require("../Modells/SupervisorModels");
 const allUser = require("../Modells/UserModels");
 const admin = require("../Modells/AdminModels");
 const servicereq = require("../Modells/serviceRequestModels");
+
 const data = async function (req, res) {
   let d = req.body;
   let data1 = await SupervisorModels.create(d);
