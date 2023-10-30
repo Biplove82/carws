@@ -70,6 +70,9 @@ router.post("/create-data", createservice);
 router.get("/get-all-service", getservice);
 router.post("/car-create",cartype);
 router.get("/get-cartype",getcartype);
+
+
+
 //supervisor api
 
 router.post("/data", data);

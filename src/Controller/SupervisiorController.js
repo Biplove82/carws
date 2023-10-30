@@ -100,7 +100,7 @@ const approve_service = async function (req, res) {
 const delete_request = async function (req, res) {
   try {
     let userId = req.params._id;
-    let deleteUser = await allUser.findByIdAndDelete(userId);
+    let deleteUser = await SupervisorModels.findByIdAndDelete(userId);
     if (!deleteUser) {
       res.status(404).json({ msg: "User not Found" });
     }

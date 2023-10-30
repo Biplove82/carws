@@ -16,6 +16,7 @@ const create_admin = async function (req, res) {
     res.status(500).json({ msg: "Failed to create admin" });
   }
 };
+//create supervisior
 const create_supervisior = async function (req, res) {
   const { userName, mobileNumber,firstName,surName,address,price, service,createUsername,confirmPassword} = req.body;
   try {
@@ -44,7 +45,7 @@ const allservicerequest = async function (req, res) {
   }
 };
 
-//edit service request
+//edit supervisior
 const editservice = async function (req, res) {
   try {
     let id = req.params._id;
@@ -61,11 +62,11 @@ const editservice = async function (req, res) {
     res.status(500).json({ msg: "error" });
   }
 };
-//delete service request
+//delete supervisior
 const deleterequest = async function (req, res) {
   try {
     let userId = req.params._id;
-    let deleteUser = await usermodel.findByIdAndDelete(userId);
+    let deleteUser = await supermodel.findByIdAndDelete(userId);
     if (!deleteUser) {
       res.status(404).json({ msg: "User not Found" });
     }
