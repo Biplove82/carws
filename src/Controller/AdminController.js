@@ -48,10 +48,11 @@ const allservicerequest = async function (req, res) {
     res.status(500).json({ msg: "User Detail Not Found" });
   }
 };
+// get supervisior
 const getsupevisior=async function(req,res){
    let pages=req.query.pages;
   try {
-    let supervisior= await supermodel.find( ).skip(10*(pages-1)).limit(10);
+    let supervisior= await supermodel.find().skip(10*(pages-1)).limit(10);
     res.send({msg:"supervosior",supervisior});
 
   } catch (error) {

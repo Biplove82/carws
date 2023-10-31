@@ -50,8 +50,12 @@ const {
   getcartype,
 } = require("../Controller/ServiceController");
 
-
-const{ transactionData, getTransdetail, getunsucesspay }=require("../Controller/TransactionController");
+const {
+  transactionData,
+  getTransdetail,
+  getunsucesspay,
+  getTrans,
+} = require("../Controller/TransactionController");
 const { create } = require("../Modells/TransactionModels");
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
@@ -69,10 +73,8 @@ router.get("/select-sub-category", serviceSubCategory);
 router.post("/create-sub-category", createsubact);
 router.post("/create-data", createservice);
 router.get("/get-all-service", getservice);
-router.post("/car-create",cartype);
-router.get("/get-cartype",getcartype);
-
-
+router.post("/car-create", cartype);
+router.get("/get-cartype", getcartype);
 
 //supervisor api
 
@@ -81,6 +83,7 @@ router.get("/get-all-user", getalluser);
 router.get("/service-request/:_id", servicerequest);
 router.put("/edit-service-request/:_id", editservicerequest);
 router.get("/approve-service", approve_service);
+router.get("/get-all-pay/:_id", getTrans);
 
 router.delete("/delete-request/:_id", delete_request);
 router.put("/assigne-service/:_id", assigne_service);
@@ -93,7 +96,7 @@ router.put("/edit-supervisior/:_id", editservice);
 router.delete("/delete-request/:_id", deleterequest);
 router.get("/approve-service", approveservice);
 router.get("/not-approve-service", notapproveservice);
-router.get("/get-all-supervisior",getsupevisior);
+router.get("/get-all-supervisior", getsupevisior);
 
 //auth api
 router.post("/user-register", userRegister);
@@ -102,13 +105,9 @@ router.post("/login", login);
 
 router.post("/sendotp", sendotp);
 
-
-
-
-
 //transcation api
 // router.post("create-trans", transactionData);
-router.post("/createTrans", transactionData );
-router.get("/get-sucessfuly-payment",getTransdetail);
-router.get("/get-unsucessful-payment",getunsucesspay)
+router.post("/createTrans", transactionData);
+router.get("/get-sucessfuly-payment", getTransdetail);
+router.get("/get-unsucessful-payment", getunsucesspay);
 module.exports = router;

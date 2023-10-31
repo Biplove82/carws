@@ -1,4 +1,5 @@
 const transcModells = require("../Modells/TransactionModels");
+const servicereq = require("../Modells/serviceRequestModels");
 
 const transactionData = async function (req, res) {
   try {
@@ -16,7 +17,6 @@ const getTransdetail = async function (req, res) {
       .find({
         paymentStatus: "sucessful",
       })
-      .populate("viewDetail")
       .skip(10 * (pages - 1))
       .limit(10);
     res.send({ msg: "sucessfull payment", service });
@@ -30,11 +30,19 @@ const getunsucesspay = async function (req, res) {
     let service = await transcModells
       .find({
         paymentStatus: "unsucessful",
-      })
-      .populate("viewDetail")
-      .skip(10 * (pages - 1))
+      }).skip(10 * (pages - 1))
       .limit(10);
     res.send({ msg: "Unsuccessful Payment", service });
+  } catch (error) {
+    res.send({ msg: "Error" });
+  }
+};
+const getTrans = async function (req, res) {
+  // let pages=req.query.pages;
+  const paymentid = req.params._id;
+  try {
+    let service = await servicereq.findById(paymentid);
+    res.send({ msg: "successfully found Transaction", service });
   } catch (error) {
     res.send({ msg: "Error" });
   }
@@ -44,4 +52,5 @@ module.exports = {
   transactionData,
   getTransdetail,
   getunsucesspay,
+  getTrans,
 };
