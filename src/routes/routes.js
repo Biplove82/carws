@@ -55,6 +55,9 @@ const {
   getTransdetail,
   getunsucesspay,
   getTrans,
+  countsucessfulypay,
+  unsucessfulpay,
+  countsupervisior,
 } = require("../Controller/TransactionController");
 const { create } = require("../Modells/TransactionModels");
 //user api
@@ -110,4 +113,7 @@ router.post("/sendotp", sendotp);
 router.post("/createTrans", transactionData);
 router.get("/get-sucessfuly-payment", getTransdetail);
 router.get("/get-unsucessful-payment", getunsucesspay);
+router.get("/count-sucessfully-pay",countsucessfulypay);
+router.get("/count-unsucessfull-pay",unsucessfulpay);
+router.get("/count-all-supervisior",countsupervisior);
 module.exports = router;

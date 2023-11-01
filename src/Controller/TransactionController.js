@@ -1,5 +1,6 @@
 const transcModells = require("../Modells/TransactionModels");
 const servicereq = require("../Modells/serviceRequestModels");
+const supermodel = require("../Modells/SupervisorModels");
 
 const transactionData = async function (req, res) {
   try {
@@ -50,10 +51,27 @@ const getTrans = async function (req, res) {
     res.send({ msg: "Error" });
   }
 };
+const countsucessfulypay =async function(req,res){
+  let count=await transcModells.find({ paymentStatus: "sucessful",}).count()
+  res.send({msg:"Sucessful paymenet",count});
+};
+
+const unsucessfulpay= async function(req,res){
+  let count=await transcModells.find({ paymentStatus: "unsucessful",}).count();
+  res.send({msg:"Unsuccessful paymenet",count})
+};
+const countsupervisior=async function(req,res){
+  let count=await supermodel.findOne({role:"2"}).count();
+  res.send({msg:"Supervisor Count",count});
+};
+
 
 module.exports = {
   transactionData,
   getTransdetail,
   getunsucesspay,
   getTrans,
+  countsucessfulypay,
+  unsucessfulpay,
+  countsupervisior,
 };
