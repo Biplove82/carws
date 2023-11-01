@@ -82,7 +82,7 @@ const serviceRqst = async function (req, res) {
 const getReqbyId = async function (req, res) {
   let userId = req.params._id;
   try {
-    let Srvc = await UserModels.findById(userId);
+    let Srvc = await srvcModels.findById(userId);
     res.status(200).json(Srvc);
   } catch (err) {
     res.status(500).json({ msg: "Service Request not found" + err });
