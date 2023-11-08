@@ -1,6 +1,7 @@
 const transcModells = require("../Modells/TransactionModels");
 const servicereq = require("../Modells/serviceRequestModels");
 const supermodel = require("../Modells/SupervisorModels");
+const userModells= require("../Modells/UserModels");
 
 const transactionData = async function (req, res) {
   try {
@@ -52,18 +53,23 @@ const getTrans = async function (req, res) {
   }
 };
 const countsucessfulypay =async function(req,res){
-  let count=await transcModells.find({ paymentStatus: "sucessful",}).count()
-  res.send({msg:"Sucessful paymenet",count});
+  let count=await transcModells.find({ paymentStatus: "sucessful",}).count();
+  let countunsuc= await transcModells.find({ paymentStatus: "unsucessful",}).count();
+  let supervisiorcount=await supermodel.find({role:"2"}).count();
+  let activeuser = await userModells.find({isActive:true}).count();
+  let inactiveuser = await userModells.find({isActive:false}).count();
+  let service= await servicereq.find().count();
+  res.send({ unsucessfulPay:countunsuc, sucessfullypay:count, supervisior:supervisiorcount, activeuser:activeuser, inactiveuser:inactiveuser,service:service});
 };
 
-const unsucessfulpay= async function(req,res){
-  let count=await transcModells.find({ paymentStatus: "unsucessful",}).count();
-  res.send({msg:"Unsuccessful paymenet",count})
-};
-const countsupervisior=async function(req,res){
-  let count=await supermodel.findOne({role:"2"}).count();
-  res.send({msg:"Supervisor Count",count});
-};
+// const unsucessfulpay= async function(req,res){
+//   let count=await transcModells.find({ paymentStatus: "unsucessful",}).count();
+//   res.send({msg:"Unsuccessful paymenet",count})
+// };
+// const countsupervisior=async function(req,res){
+//   let count=await supermodel.findOne({role:"2"}).count();
+//   res.send({msg:"Supervisor Count",count});
+// };
 
 
 module.exports = {
@@ -72,6 +78,4 @@ module.exports = {
   getunsucesspay,
   getTrans,
   countsucessfulypay,
-  unsucessfulpay,
-  countsupervisior,
 };
