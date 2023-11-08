@@ -34,7 +34,7 @@ const getunsucesspay = async function (req, res) {
         paymentStatus: "unsucessful",
       })
       .populate("viewDetail")
-      .skip(10 * (pages - 1))
+      .skip(10* (pages - 1))
       .limit(10);
     res.send({ msg: "Unsuccessful Payment", service });
   } catch (error) {
