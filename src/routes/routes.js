@@ -72,7 +72,7 @@ router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
 router.post("/feedback", fedBack);
 router.post("/complaint", compalint);
-// router.get("/get-feedback",getfedback);
+router.get("/get-feedback",getfedback);
 
 //Service api
 

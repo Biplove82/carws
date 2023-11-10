@@ -1,13 +1,10 @@
 const mongoose=require("mongoose");
 const contactusSchema = new mongoose.Schema({
-    Hours: {
-        Days: {type:String},
+    Hours:{
+        Days: {type:String,default:"Monday"},
         
-      
-    },
-      
-        
- userName:{
+        },
+       userName:{
         type:String,
        default:" ",
     },
@@ -16,15 +13,10 @@ const contactusSchema = new mongoose.Schema({
         default: "+917017866149",
       
     },
-    
-
-
-    
-    
     address:{
         type:String,
         default:"Noida Delhi NCR UP",
-    } 
+    },
 
     
     
