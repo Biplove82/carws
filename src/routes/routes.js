@@ -9,6 +9,7 @@ const {
   getUserData,
   fedBack,
   compalint,
+  getfedback,
 } = require("../Controller/UserController");
 
 const {
@@ -60,6 +61,8 @@ const {
   countsupervisior,
 } = require("../Controller/TransactionController");
 const { create } = require("../Modells/TransactionModels");
+
+const{ cctus, getcontactus }=require("../Controller/ContactUsController");
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
 router.get("/get-user-Data/:_id", getUserData); //get user by id
@@ -69,6 +72,7 @@ router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
 router.post("/feedback", fedBack);
 router.post("/complaint", compalint);
+// router.get("/get-feedback",getfedback);
 
 //Service api
 
@@ -112,8 +116,13 @@ router.post("/sendotp", sendotp);
 // router.post("create-trans", transactionData);
 router.post("/createTrans", transactionData);
 router.get("/get-sucessfuly-payment", getTransdetail);
-router.get("/get-unsucessful-payment", getunsucesspay);
+router.get("/get-unsucessful-payment/:_id", getunsucesspay);
 router.get("/count",countsucessfulypay);
 // router.get("/count-unsucessfull-pay",unsucessfulpay);
 // router.get("/count-all-supervisior",countsupervisior);
+
+
+//conctasus api
+router.post("/create-contactus",cctus);
+router.get("/get-contactsus",getcontactus);
 module.exports = router;
