@@ -113,13 +113,12 @@ router.post("/login", login);
 router.post("/sendotp", sendotp);
 
 //transcation api
-// router.post("create-trans", transactionData);
+
 router.post("/createTrans", transactionData);
 router.get("/get-sucessfuly-payment", getTransdetail);
 router.get("/get-unsucessful-payment/:_id", getunsucesspay);
 router.get("/count",countsucessfulypay);
-// router.get("/count-unsucessfull-pay",unsucessfulpay);
-// router.get("/count-all-supervisior",countsupervisior);
+
 
 
 //conctasus api

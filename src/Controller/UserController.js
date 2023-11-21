@@ -134,14 +134,12 @@ const fedBack = async function (req, res) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
 };
-const getfedback=async function (req,res){
+const getfedback = async function (req, res) {
   try {
-    let  get= await UserModels.find({ msg: "Feedback submitted successfully"}).select({ msg: "Feedback submitted successfully"});
-    res.status(200).json(get);
-    
+    let get = await UserModels.find({description:description});
+    res.send({ msg: "FeedBack", get});
   } catch (error) {
-    res.status(500).json({msg:"error"});
-    
+    res.status(500).json({ msg: "error" });
   }
 };
 //api for complaint
@@ -166,5 +164,4 @@ module.exports = {
   fedBack,
   compalint,
   getfedback,
-  
 };
