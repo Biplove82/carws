@@ -63,6 +63,8 @@ const {
 const { create } = require("../Modells/TransactionModels");
 
 const{ cctus, getcontactus }=require("../Controller/ContactUsController");
+const{}=require("../Modells/ServiceplanModells");
+const { serviceplan, getserviceplan, getmemeberpaln } = require("../Controller/ServicetypeController");
 //user api
 router.post("/CreateData", CreateData); //to create DataBase
 router.get("/get-user-Data/:_id", getUserData); //get user by id
@@ -125,3 +127,8 @@ router.get("/count",countsucessfulypay);
 router.post("/create-contactus",cctus);
 router.get("/get-contactsus",getcontactus);
 module.exports = router;
+//serviceplan
+
+router.post("/create-service-plan",serviceplan);
+router.get("/get-service-plan",getserviceplan);
+router.get("/get-membership-paln",getmemeberpaln);
