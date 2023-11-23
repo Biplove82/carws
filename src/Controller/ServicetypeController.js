@@ -13,20 +13,35 @@ const serviceplan=async function(req,res){
         res.status(400).json({msg:"Error"});
     }
 }
-const getserviceplan=async function(req,res){
-    try {
+// const getserviceplan=async function(req,res){
+//     try {
         
-        const serviceplan=await serviceplanmodells.find({ServiceType:"Routine Clean"}).select('-_id');
-        let serviceObject = {};
-        serviceplan.forEach(serviceplan=> {
-            serviceObject[serviceplan.uniqueId]=serviceplan
-        })
-        res.status(200).json({serviceObject});
+//         const serviceplans=await serviceplanmodells.find({ServiceType:"Routine Clean"}).select('-_id');
+//         let serviceObject = {};
+//         serviceplans.forEach(serviceplan=> {
+//             serviceObject[serviceplan.uniqueId]=serviceplan
+//         })
+//         res.status(200).json({serviceObject:serviceObject});
 
+//     } catch (error) {
+//         res.status(400).json({error})
+//     }
+// }
+const getserviceplan = async function (req, res) {
+    try {
+        const serviceplans = await serviceplanmodells.find({Amount:"499/Months" }).select('-_id');
+        let serviceObject = {};
+        
+        serviceplans.forEach(serviceplan => {
+            serviceObject[serviceplans.uniqueId] = serviceplan;
+        });
+
+        res.status(200).json({ serviceObject });
     } catch (error) {
-        res.status(400).json({error})
+        res.status(400).json({ error });
     }
-}
+};
+
 const getmemeberpaln= async function(req,res){
     try {
             let memplan=await serviceplanmodells.find({ServiceType:"Basic"}).select('-_id');
