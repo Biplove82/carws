@@ -29,7 +29,7 @@ const serviceplan=async function(req,res){
 // }
 const getserviceplan = async function (req, res) {
     try {
-        const serviceplans = await serviceplanmodells.find({Amount:"499/Months" }).select('-_id');
+        const serviceplans = await serviceplanmodells.find({ServiceType:"Routine clean" }).select('-_id');
         let serviceObject = {};
         
         serviceplans.forEach(serviceplan => {
