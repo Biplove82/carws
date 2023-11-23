@@ -4,10 +4,10 @@ const serviceplanschema = new mongoose.Schema(
     ServiceType: { type: String, default: " " },
     Amount: { type: String, default: " " },
 
-    CardContent: {
+    CardContent: [{
       type: String,
       default: " ",
-    },
+    }],
   },
   { timestamps: true }
 );
