@@ -5,16 +5,6 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
 
-const twilio = require("twilio");
-//
-// const client = twilio('YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN');
-// const twilioPhoneNumber = 'YOUR_TWILIO_PHONE_NUMBER';
-const randomstring = require("randomstring");
-const accountSid = "ACffb6cb2d6ca7ecbc31b02de496034c08";
-const authToken = "bd1437fbaf28bb74cda7cfedd446538a";
-const twilioPhoneNumber = "+19524666531"; // Replace with your Twilio phone number
-const client = require("twilio")(accountSid, authToken);
-
 const userRegister = async function (req, res) {
   const {
     userName,
@@ -48,6 +38,53 @@ const userRegister = async function (req, res) {
       .json({ id: newUser._id, msg: "User Registered Succesfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" + error });
+  }
+};
+
+const sendotp = async function (req, res) {
+  try {
+    const { userName } = req.body;
+
+    // Find the user by email
+    const user = await authmodels.findOne({ userName });
+
+    // Check if the user exists
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Generate a random 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    // Save the new OTP to the user in the database
+    user.otp = otp;
+    await user.save();
+
+    // Send the OTP to the user's email
+    var transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "5baa42b75630c2",
+        pass: "7a0468f22aaaeb",
+      },
+    });
+    const info = await transport.sendMail({
+      from: '"Your Name" <biplovmandal.mandla@gmail.com>', // Update with your name and email
+      to: userName,
+      subject: "Email Verification OTP",
+      text: `Your OTP for email verification is: ${otp}`,
+      html: `<b>Your OTP for email verification is: ${otp}</b>`,
+    });
+
+    res
+      .status(200)
+      .json({ message: "OTP sent successfully. Check your email for OTP." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
@@ -86,73 +123,4 @@ const login = async function (req, res) {
     res.status(500).json({ error: "Invalid User" });
   }
 };
-
-const sendotp = async function (req, res) {
-  const { userName, mobileNumber } = req.body;
-  const otp = randomstring.generate({ length: 6, charset: "numeric" });
-  try {
-    let user = await authmodels.findOne({ userName });
-    if (user) {
-      user.otp;
-      await user.save();
-    } else {
-      await authmodels.create({ userName, otp });
-    }
-    await client.messages.create({
-      body: "your otp for registration: ${otp}",
-      from: twilioPhoneNumber,
-      to: "+919798715576",
-    });
-    res.json({ success: true, message: "OTP sent successfully." });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to send OTP." + error });
-  }
-};
-// Configure nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'Jalandhar16092000@gmail.com',
-    pass: 'Alice9358',
-  },
-});
-
-// const forgetpass=async function(req,res){
-//   try {
-//     let {userName}=req.body;
-//     let user=await authmodels.findOne({userName})
-//     if(!user){
-//       return res.status(422).send("User not found");
-//     }
-  
-//     // Generate a new password and save it in the database
-//   // Generate reset token and set expiration time (1 hour)
-//   const resetToken = jwt.sign({ userName }, 'your_secret_key', { expiresIn: '1h' });
-//   user.resetToken = resetToken;
-//   user.resetTokenExpiration = Date.now() + 3600000; // 1 houre
-// await user.save();
-//  // Send reset password email to the user
-//  console.log(user);
-//  const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
-//  const mailOptions = {
-//    from: 'Jalandhar16092000@gmail.com',
-//    to: userName,
-//    subject: 'Reset Password',
-//    html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`,
-//  };
-
-//     // Send an email with the generated password
-//     transporter.sendMail(mailOptions, (error, info) => {
-//       if (error) {
-//         return res.status(500).json({ message: 'Email not sent' });
-//       }
-//       return res.status(200).json({ message: 'Email sent successfully' });
-//     });
-//   }
-  
-
-
-
-module.exports = { userRegister, resbymobnum, login, sendotp}
+module.exports = { userRegister, resbymobnum, login, sendotp };

@@ -111,8 +111,9 @@ router.get("/get-all-supervisior", getsupevisior);
 router.post("/user-register", userRegister);
 router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
-
-router.post("/sendotp", sendotp);
+router.post("/send-otp",sendotp);
+//router.post("sendotp",sendotp);
+// router.post("/sendotp", sendotp);
 
 //transcation api
 
