@@ -5,18 +5,23 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
 
+
+
+//user registeration
+
 const userRegister = async function (req, res) {
-  const {
-    userName,
-    passWord,
-    role,
-    firstName,
-    surName,
-    mobileNumber,
-    alternateNumber,
-    address,
-  } = req.body;
+  
   try {
+    const {
+      userName,
+      passWord,
+      role,
+      firstName,
+      surName,
+      mobileNumber,
+      alternateNumber,
+      address,
+    } = req.body;
     const existingUser = await authmodels.findOne({ userName: userName });
     if (existingUser) {
       return res.status(401).json({ message: "Username already exists" });
@@ -40,6 +45,8 @@ const userRegister = async function (req, res) {
     res.status(500).json({ message: "Internal Server Error" + error });
   }
 };
+
+//user verification with otp
 
 const sendotp = async function (req, res) {
   try {
@@ -88,6 +95,8 @@ const sendotp = async function (req, res) {
   }
 };
 
+//user registration with mobile number
+
 const resbymobnum = async function (req, res) {
   try {
     let { mobileNumber, userName } = req.body;
@@ -104,6 +113,8 @@ const resbymobnum = async function (req, res) {
   }
 };
 
+
+//user login 
 const login = async function (req, res) {
   let { userName, passWord } = req.body;
   try {
@@ -123,4 +134,6 @@ const login = async function (req, res) {
     res.status(500).json({ error: "Invalid User" });
   }
 };
+
+
 module.exports = { userRegister, resbymobnum, login, sendotp };
