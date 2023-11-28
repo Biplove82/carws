@@ -88,7 +88,7 @@ const sendotp = async function (req, res) {
 
     res
       .status(200)
-      .json({ message: "OTP sent successfully. Check your email for OTP." });
+      .json({ message: "OTP sent successfully. Check your email for OTP.",  otp: otp,});
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
