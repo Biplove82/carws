@@ -55,6 +55,7 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
+      
     } = req.body;
     const existingUser = await authmodels.findOne({ userName: userName });
     if (existingUser) {
@@ -70,6 +71,7 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
+      
     });
     await newUser.save();
     res
@@ -131,7 +133,55 @@ const sendotp = async function (req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+//forgetpasswprd 
+const forgetpasswprd= async function(req,res){
+  try {
+    const { userName } = req.body;
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const user = await authmodels.findOneAndUpdate({ userName }, { otp }, { new: true, upsert: true });
 
+    var transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "5baa42b75630c2",
+        pass: "7a0468f22aaaeb",
+      },
+    });
+    const info = await transport.sendMail({
+      from: '"Your Name" <biplovmandal.mandla@gmail.com>', // Update with your name and email
+      to: userName,
+      subject: "Email Verification OTP",
+      text: `Your OTP for email verification is: ${otp}`,
+      html: `<b>Your OTP for email verification is: ${otp}</b>`,
+    });
+    res.status(200).json({
+      message: 'OTP sent successfully. Check your email for OTP.',
+      userId: user._id,
+      userName:userName, // You may want to include the user ID in the response for further verification steps
+    });
+ } catch (error) {
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+}
+//resetpassowrd
+const resetpass= async function(req,res){
+  try {
+    const { userName, otp, newPassword } = req.body;
+    const user = await authmodels.findOne({ userName:userName, otp });
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'Invalid OTP' });
+    }
+    user.otp = null;
+    user.password = newPassword;
+    await user.save();
+    res.status(200).json({ success: true, message: 'Password reset successful' });
+  
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    
+  }
+}
 //user registration with mobile number
 
 const resbymobnum = async function (req, res) {
@@ -171,4 +221,5 @@ const login = async function (req, res) {
   }
 };
 
-module.exports = { userRegister,resbymobnum, login, sendotp };
+
+module.exports = { userRegister,resbymobnum, login, sendotp,forgetpasswprd,resetpass };

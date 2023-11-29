@@ -30,6 +30,8 @@ const {
   sendotp,
   forgetpass,
   userregistertration,
+  forgetpasswprd,
+  resetpass,
 } = require("../Controller/AuthController"); //controller
 const {
   create_admin,
@@ -114,8 +116,8 @@ router.post("/user-register", userRegister);
 router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
 router.post("/send-otp",sendotp);
-//router.post("sendotp",sendotp);
-// router.post("/sendotp", sendotp);
+router.post("/forget-password",forgetpasswprd);
+router.post("/reset-password",resetpass);
 
 //transcation api
 
