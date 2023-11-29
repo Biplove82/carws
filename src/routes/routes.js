@@ -29,6 +29,7 @@ const {
   login,
   sendotp,
   forgetpass,
+  userregistertration,
 } = require("../Controller/AuthController"); //controller
 const {
   create_admin,
@@ -109,6 +110,7 @@ router.get("/get-all-supervisior", getsupevisior);
 
 //auth api
 router.post("/user-register", userRegister);
+// router.post("/user-registration",userregistertration);
 router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
 router.post("/send-otp",sendotp);

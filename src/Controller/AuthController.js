@@ -5,12 +5,46 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
 
+// //user registeration
+// const userregistertration = async function (req, res) {
+//   try {
+//     const {
+//       userName,
+//       passWord,
+//       firstName,
+//       surName,
+//       role,
+//       mobileNumber,
+//       alternateNumber,
+//       address,
+//     } = req.body;
+//     const existinguser = await authmodels.findOne({ userName: userName });
+//     if (existinguser) {
+//       return res.status(409).send("username already exists");
+//     }
+//     let hasedpassword = await bcrypt.hash(passWord, 10);
 
-
-//user registeration
+//     const newuser = new authmodels({
+//       userName: userName,
+//       passWord: hasedpassword,
+//       firstName: firstName,
+//       surName: surName,
+//       role,
+//       mobileNumber: mobileNumber,
+//       alternateNumber: alternateNumber,
+//       address: address,
+//     });
+//     await newuser.save();
+//     res
+//       .status(200)
+//       .json({ id: newuser._id, msg: "User Registered Succesfully" });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server Error" + error });
+//   }
+// };
 
 const userRegister = async function (req, res) {
-  
+
   try {
     const {
       userName,
@@ -53,21 +87,21 @@ const sendotp = async function (req, res) {
     const { userName } = req.body;
 
     // Find the user by email
-    const user = await authmodels.findOne({ userName });
+    // const user = await authmodels.findOne({ userName });
 
-    // Check if the user exists
-    if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User not found" });
-    }
+    // // Check if the user exists
+    // if (!user) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, message: "User not found" });
+    // }
 
     // Generate a random 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000);
 
     // Save the new OTP to the user in the database
-    user.otp = otp;
-    await user.save();
+    // user.otp = otp;
+    // await otp.save();
 
     // Send the OTP to the user's email
     var transport = nodemailer.createTransport({
@@ -88,7 +122,10 @@ const sendotp = async function (req, res) {
 
     res
       .status(200)
-      .json({ message: "OTP sent successfully. Check your email for OTP.",  otp: otp,});
+      .json({
+        message: "OTP sent successfully. Check your email for OTP.",
+        otp: otp,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
@@ -113,8 +150,7 @@ const resbymobnum = async function (req, res) {
   }
 };
 
-
-//user login 
+//user login
 const login = async function (req, res) {
   let { userName, passWord } = req.body;
   try {
@@ -135,5 +171,4 @@ const login = async function (req, res) {
   }
 };
 
-
-module.exports = { userRegister, resbymobnum, login, sendotp };
+module.exports = { userRegister,resbymobnum, login, sendotp };
