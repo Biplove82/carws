@@ -158,7 +158,8 @@ const forgetpasswprd= async function(req,res){
     res.status(200).json({
       message: 'OTP sent successfully. Check your email for OTP.',
       userId: user._id,
-      userName:userName, // You may want to include the user ID in the response for further verification steps
+      userName:userName,
+      otp:otp, // You may want to include the user ID in the response for further verification steps
     });
  } catch (error) {
     res.status(500).json({ success: false, message: 'Internal Server Error' });

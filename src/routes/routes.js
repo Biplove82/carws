@@ -112,7 +112,6 @@ router.get("/get-all-supervisior", getsupevisior);
 
 //auth api
 router.post("/user-register", userRegister);
-// router.post("/user-registration",userregistertration);
 router.post("/res-by-mobile-num", resbymobnum);
 router.post("/login", login);
 router.post("/send-otp",sendotp);
