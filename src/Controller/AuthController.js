@@ -173,9 +173,11 @@ const resetpass= async function(req,res){
     if (!user) {
       return res.status(400).json({ success: false, message: 'Invalid OTP' });
     }
-    user.otp = null;
     user.passWord = newPassword;
+    user.otp = null;
+   
     await user.save();
+    // console.log(user);
     res.status(200).json({ success: true, message: 'Password reset successful' });
   
   } catch (error) {
@@ -209,7 +211,7 @@ const login = async function (req, res) {
     if (!user) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
-    const isPasswordMatch = await bcrypt.compare(passWord, user.passWord);
+    const isPasswordMatch = bcrypt.compare(passWord, user.passWord);
 
     if (!isPasswordMatch) {
       return res.status(401).json({ error: "Invalid username or password" });
