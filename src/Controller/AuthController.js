@@ -174,7 +174,7 @@ const resetpass= async function(req,res){
       return res.status(400).json({ success: false, message: 'Invalid OTP' });
     }
     user.otp = null;
-    user.password = newPassword;
+    user.passWord = newPassword;
     await user.save();
     res.status(200).json({ success: true, message: 'Password reset successful' });
   
