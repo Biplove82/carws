@@ -185,6 +185,45 @@ const resetpass= async function(req,res){
     
   }
 }
+//resend otp
+const resendOtp =async function(req,res){
+  try {
+    const {userName}=req.body;
+    const user = await authmodels.findOne({ userName });
+      // Check if the user exists
+      if (!user) {
+        return res.status(400).json({ success: false, message: 'User not found' });
+      }
+      let otp = Math.floor(100000 + Math.random() * 900000);
+      user.otp = otp;
+      await user.save();
+      var transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "5baa42b75630c2",
+          pass: "7a0468f22aaaeb",
+        },
+      });
+      const info = await transport.sendMail({
+        from: '"Your Name" <biplovmandal.mandla@gmail.com>', // Update with your name and email
+        to: userName,
+        subject: "Email Verification OTP",
+        text: `Your OTP for email verification is: ${otp}`,
+        html: `<b>Your OTP for email verification is: ${otp}</b>`,
+      });
+      res.status(200).json({
+        message: 'OTP resent successfully. Check your email for OTP.',
+        otp: otp,
+      });
+} catch (error) {
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+    
+  
+
 //user registration with mobile number
 
 const resbymobnum = async function (req, res) {
@@ -225,4 +264,4 @@ const login = async function (req, res) {
 };
 
 
-module.exports = { userRegister,resbymobnum, login, sendotp,forgetpasswprd,resetpass };
+module.exports = { userRegister,resbymobnum, login, sendotp,forgetpasswprd,resetpass,resendOtp};

@@ -32,6 +32,7 @@ const {
   userregistertration,
   forgetpasswprd,
   resetpass,
+  resendOtp,
 } = require("../Controller/AuthController"); //controller
 const {
   create_admin,
@@ -117,6 +118,7 @@ router.post("/login", login);
 router.post("/send-otp",sendotp);
 router.post("/forget-password",forgetpasswprd);
 router.post("/reset-password",resetpass);
+router.post("/resend-otp",resendOtp)
 
 //transcation api
 
