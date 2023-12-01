@@ -153,7 +153,7 @@ const resendOtp = async function (req, res) {
   try {
     const { userName } = req.body;
     const user = await authmodels.findOne({ userName });
-    // Check if the user exists
+    
     if (!user) {
       return res
         .status(400)
@@ -173,7 +173,7 @@ const resendOtp = async function (req, res) {
       },
     });
     const info = await transport.sendMail({
-      from: '"Your Name" <biplavmandal.mandal@gmail.com>', // Update with your name and email
+      from: '"Your Name" <biplavmandal.mandal@gmail.com>', 
       to: userName,
       subject: "Email Verification OTP",
       text: `Your OTP for email verification is: ${otp}`,
