@@ -132,11 +132,14 @@ const resetpass = async function (req, res) {
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid OTP" });
     }
-    user.passWord = newPassword;
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.passWord = hashedPassword;
     user.otp = null;
+    // user.passWord = newPassword;
+    // user.otp = null;
 
-    await user.save();
-
+   let x= await user.save();
+console.log(x),
     res
       .status(200)
       .json({ success: true, message: "Password reset successful" });
@@ -158,8 +161,8 @@ const resendOtp = async function (req, res) {
     }
     let otp = Math.floor(100000 + Math.random() * 900000);
     user.otp = otp;
-     await user.save();
-    // console.log(x);
+     let x=await user.save();
+    console.log(x);
     var transport = nodemailer.createTransport({
       service: "gmail",
       // host: "sandbox.smtp.mailtrap.io",
@@ -212,19 +215,23 @@ const login = async function (req, res) {
   let { userName, passWord } = req.body;
   try {
     let user = await authmodels.findOne({ userName });
-    if (!user) {
+    if (!user || !(await bcrypt.compare(passWord, user.passWord))) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
-    const isPasswordMatch = bcrypt.compare(passWord, user.passWord);
+  //   if (!user) {
+  //     return res.status(401).json({ error: "Invalid username or password" })
+  //   };
+  //    let isPasswordMatch = await bcrypt.compare(passWord, user.passWord);
+  //  console.log(isPasswordMatch);
 
-    if (!isPasswordMatch) {
-      return res.status(401).json({ error: "Invalid username or password" });
-    }
+  //   if (!isPasswordMatch) {
+  //     return res.status(401).json({ error: "Invalid username or password" });
+  //   }
     let token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
     res.json({ token });
   } catch (error) {
-    res.status(500).json({ error: "Invalid User" });
+    res.status(500).json({ error: "Invalid User" +error});
   }
 };
 
@@ -236,4 +243,5 @@ module.exports = {
   forgetpasswprd,
   resetpass,
   resendOtp,
+  
 };

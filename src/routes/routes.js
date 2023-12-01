@@ -33,6 +33,7 @@ const {
   forgetpasswprd,
   resetpass,
   resendOtp,
+  loin,
 } = require("../Controller/AuthController"); //controller
 const {
   create_admin,
@@ -114,11 +115,12 @@ router.get("/get-all-supervisior", getsupevisior);
 //auth api
 router.post("/user-register", userRegister);
 router.post("/res-by-mobile-num", resbymobnum);
-router.post("/login", login);
+ router.post("/login", login);
 router.post("/send-otp",sendotp);
 router.post("/forget-password",forgetpasswprd);
 router.post("/reset-password",resetpass);
 router.post("/resend-otp",resendOtp)
+// router.post("/loin",loin);
 
 //transcation api
 
