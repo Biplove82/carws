@@ -49,7 +49,7 @@ const serviceRqst = async function (req, res) {
   } = req.body;
 
   try {
-    const existingUser = await srvcModels.find({ userName: userName });
+    const existingUser = await UserModels.findOne({ userName: userName });
     if (!existingUser) {
       return res.status(400).json({ message: "Username Not foud" });
     }
