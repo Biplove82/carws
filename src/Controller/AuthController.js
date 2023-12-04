@@ -153,8 +153,7 @@ const resendOtp = async function (req, res) {
   try {
     const { userName } = req.body;
     const user = await authmodels.findOne({ userName });
-    
-    if (!user) {
+     if (!user) {
       return res
         .status(400)
         .json({ success: false, message: "User not found" });
@@ -192,6 +191,8 @@ const resendOtp = async function (req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+
+
 //user registration with mobile number
 
 const resbymobnum = async function (req, res) {

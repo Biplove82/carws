@@ -22,6 +22,7 @@ const getalluser = async function (req, res) {
   }
 };
 
+
 //get all service request api
 const servicerequest = async function (req, res) {
   try {
@@ -134,7 +135,6 @@ module.exports = {
   servicerequest,
   editservicerequest,
   approve_service,
-
   delete_request,
   assigne_service,
 };

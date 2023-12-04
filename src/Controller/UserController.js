@@ -1,5 +1,6 @@
 const UserModels = require("../Modells/UserModels");
 const srvcModels = require("../Modells/serviceRequestModels");
+const feedBackmodels=require("../Modells/FedbackModels");
 
 const CreateData = async function (req, res) {
   let Data = req.body;
@@ -108,7 +109,8 @@ const Delete = async function (req, res) {
 const fedBack = async function (req, res) {
   const {
     firstName,
-    description,
+    message,
+    
     userName,
     surName,
     address,
@@ -116,9 +118,10 @@ const fedBack = async function (req, res) {
     alternateNumber,
   } = req.body;
   try {
-    let fdback = new UserModels({
+    let fdback = new feedBackmodels({
       firstName,
-      description,
+      message,
+      
       userName,
       surName,
       mobileNumber,
