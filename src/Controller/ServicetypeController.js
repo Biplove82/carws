@@ -29,14 +29,16 @@ const serviceplan=async function(req,res){
 // }
 const getserviceplan = async function (req, res) {
     try {
-        const serviceplans = await serviceplanmodells.find({ServiceType:"Routine clean" }).select('-_id');
-        let serviceObject = {};
+        const serviceplans = await serviceplanmodells.findOne({ServiceType:"Routine clean" }).select('-_id');
+        // let serviceObject = {};
+        // const serviceObject = Object.fromEntries(serviceplans.map(serviceplan => [serviceplan.toObject()]));
         
-        serviceplans.forEach(serviceplan => {
-            serviceObject[serviceplans.uniqueId] = serviceplan;
-        });
+        // serviceplans.forEach(serviceplan => {
+        //     serviceObject[serviceplan.uniqueId] = serviceplan.toObject();;
+        // });
 
-        res.status(200).json({ serviceObject });
+        res.status(200).json({ serviceplans});
+        console.log(serviceplans);
     } catch (error) {
         res.status(400).json({ error });
     }
@@ -44,12 +46,12 @@ const getserviceplan = async function (req, res) {
 
 const getmemeberpaln= async function(req,res){
     try {
-            let memplan=await serviceplanmodells.find({ServiceType:"Basic"}).select('-_id');
-            let memberObject={};
-            memplan.forEach(memplan =>{
-                memberObject[memplan.uniqueId] = memplan
-            })
-            res.status(200).json({memberObject});
+            let memberShipPlan=await serviceplanmodells.findOne({ServiceType:"Basic"}).select('-_id');
+            // let memberObject={};
+            // memplan.forEach(memplan =>{
+            //     memberObject[memplan.uniqueId] = memplan
+            // })
+            res.status(200).json({memberShipPlan});
     } catch (error) {
         res.status(400).json({error})
     }
