@@ -38,8 +38,6 @@ const serviceRqst = async function (req, res) {
   const {
     userName,
     serviceType,
-    addedBy,
-
     status,
     firstName,
     surName,
@@ -51,14 +49,14 @@ const serviceRqst = async function (req, res) {
   } = req.body;
 
   try {
-    const existingUser = await srvcModels.findOne({ userName: userName });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already exists" });
-    }
+    // const existingUser = await srvcModels.findOne({ userName: userName });
+    // if (!existingUser) {
+    //   return res.status(400).json({ message: "Username Not foud" });
+    // }
     const serviceRequest = new srvcModels({
       userName,
       serviceType,
-      addedBy,
+      
       status,
       firstName,
       surName,
