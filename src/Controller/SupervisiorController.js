@@ -21,6 +21,18 @@ const getalluser = async function (req, res) {
     res.status(500).json({ msg: "Data Not Found" });
   }
 };
+//get single supervisior by id
+const getsinglesupervisorbyid = async function (req, res) {
+  let id = req.params._id;
+  try {
+    let user = await SupervisorModels.findById(id);
+    res.status(200).json({user});
+    
+  } catch (error) {
+    res.status(500).json({msg:"Intrnal server error"})
+    
+  }
+}
 
 
 //get all service request api
@@ -81,22 +93,6 @@ const approve_service = async function (req, res) {
   }
 };
 
-//Not approved request.
-
-// const not_approved_service = async function (req, res) {
-//   let pages = req.query.params;
-//   try {
-//     const notapproved = await allUser
-//       .find({
-//         status: { $ne:0, $nin: [" ", null] },
-//       })
-//       .skip(10 * (pages - 1))
-//       .limit(10);
-//     res.json(notapproved);
-//   } catch (error) {
-//     res.json({ msg: "Service not found" });
-//   }
-// };
 //api for delete service request.
 const delete_request = async function (req, res) {
   try {
@@ -137,4 +133,5 @@ module.exports = {
   approve_service,
   delete_request,
   assigne_service,
+  getsinglesupervisorbyid
 };

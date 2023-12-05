@@ -21,6 +21,7 @@ const {
   not_approved_service,
   delete_request,
   assigne_service,
+  getsinglesupervisorbyid,
 } = require("../Controller/SupervisiorController");
 
 const {
@@ -74,7 +75,7 @@ const { serviceplan, getserviceplan, getmemeberpaln } = require("../Controller/S
 router.post("/CreateData", CreateData); //to create DataBase
 router.get("/get-user-Data/:_id", getUserData); //get user by id
 router.put("/update-user/:_id", updateUser); // Edit user by id
-router.post("/service-request", serviceRqst); //bd is not saving in mongdb
+router.post("/service-request", serviceRqst); 
 router.get("/get-service-request/:_id", getReqbyId); //req for service
 router.delete("/Delete/:_id", Delete); //delete  user by id
 router.post("/feedback", fedBack);
@@ -98,6 +99,7 @@ router.get("/service-request/:_id", servicerequest);
 router.put("/edit-service-request/:_id", editservicerequest);
 router.get("/approve-service", approve_service);
 router.get("/get-all-pay/:_id", getTrans);
+router.get("/get-supervisior-byid/:_id",getsinglesupervisorbyid);
 
 router.delete("/delete-request/:_id", delete_request);
 router.put("/assigne-service/:_id", assigne_service);
@@ -134,6 +136,7 @@ router.get("/count",countsucessfulypay);
 //conctasus api
 router.post("/create-contactus",cctus);
 router.get("/get-contactsus",getcontactus);
+
 module.exports = router;
 //serviceplan
 

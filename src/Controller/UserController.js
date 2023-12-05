@@ -1,6 +1,6 @@
 const UserModels = require("../Modells/UserModels");
 const srvcModels = require("../Modells/serviceRequestModels");
-const feedBackmodels=require("../Modells/FedbackModels");
+const feedBackmodels = require("../Modells/FedbackModels");
 
 const CreateData = async function (req, res) {
   let Data = req.body;
@@ -56,7 +56,6 @@ const serviceRqst = async function (req, res) {
     const serviceRequest = new srvcModels({
       userName,
       serviceType,
-      
       status,
       firstName,
       surName,
@@ -71,7 +70,7 @@ const serviceRqst = async function (req, res) {
     res.status(201).json({
       id: serviceRequest._id,
       message: "Service request created successfully",
-    }); //res will be user
+    });
   } catch (error) {
     res.status(500).json({ message: "Not Created" + error });
   }
@@ -108,7 +107,6 @@ const fedBack = async function (req, res) {
   const {
     firstName,
     message,
-    
     userName,
     surName,
     address,
@@ -119,7 +117,7 @@ const fedBack = async function (req, res) {
     let fdback = new feedBackmodels({
       firstName,
       message,
-      
+
       userName,
       surName,
       mobileNumber,
@@ -130,15 +128,14 @@ const fedBack = async function (req, res) {
     res
       .status(201)
       .json({ msg: "Feedback submitted successfully", feedback: fdback });
-    // res.status(201).send({msg: fdback });
   } catch (err) {
     res.status(500).json({ message: "Not Submitted" + err });
   }
 };
 const getfedback = async function (req, res) {
   try {
-    let get = await UserModels.find({description:description});
-    res.send({ msg: "FeedBack", get});
+    let get = await UserModels.find({ description: description });
+    res.send({ msg: "FeedBack", get });
   } catch (error) {
     res.status(500).json({ msg: "error" });
   }

@@ -45,29 +45,7 @@ const getunsucesspay = async function (req, res) {
     res.send({ msg: "Error" });
   }
 };
-// const getUnsuccessfulPay = async function (req, res) {
-//   // let pages = req.query.pages;
-//   let userId = req.params._id;
 
-//   try {
-//     // Use Promise.all to execute multiple asynchronous operations concurrently
-//     const [transcModelsData, viewDetail] = await Promise.all([
-//       transcModells.find({ paymentStatus: "unsucessful" }),
-//       servicereq.findById(userId),
-//     ]);
-
-//     // Assuming transcModelsData is an array, if it's not, adjust accordingly
-//     let ans = {
-//       transcModels: transcModelsData,
-//       viewDetail: viewDetailData,
-//     };
-
-//     res.send({ msg: "Unsuccessful Payment", ans });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send({ msg: "Error" });
-//   }
-// };
 const getTrans = async function (req, res) {
   // let pages=req.query.pages;
   const paymentid = req.params._id;
