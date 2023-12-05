@@ -246,7 +246,7 @@ const login = async function (req, res) {
 const getlogindata= async function(req,res){
   let data =  req.params._id;
   try {
-    const loginDetail = await authmodels.findById(data);
+    const loginDetail = await authmodels.findById(data).select("-passWord");
     res.status(200).json({loginDetail});
     } catch (error) {
       res.status(500).json({msg: "Internal Server Error"});
