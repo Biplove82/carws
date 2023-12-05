@@ -243,6 +243,16 @@ const login = async function (req, res) {
     res.status(500).json({ error: "Invalid User" +error});
   }
 };
+const getlogindata= async function(req,res){
+  let data =  req.params._id;
+  try {
+    const loginDetail = await authmodels.findById(data);
+    res.status(200).json({loginDetail});
+    } catch (error) {
+      res.status(500).json({msg: "Internal Server Error"});
+    
+  }
+}
 
 module.exports = {
   userRegister,
@@ -252,5 +262,6 @@ module.exports = {
   forgetpasswprd,
   resetpass,
   resendOtp,
+  getlogindata,
   
 };
