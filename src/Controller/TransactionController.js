@@ -19,10 +19,10 @@ const getTransdetail = async function (req, res) {
       .find({
         paymentStatus: "sucessful",
       })
-      .populate("viewDetail")
+      // .populate("viewDetail")
 
-      .skip(10 * (pages - 1))
-      .limit(10);
+      // .skip(10 * (pages - 1))
+      // .limit(10);
     res.send({ msg: "sucessfull payment", service });
   } catch (error) {
     res.send({ msg: "Error" });

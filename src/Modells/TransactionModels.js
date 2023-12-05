@@ -13,9 +13,8 @@ const transactionSchema = new mongoose.Schema(
       type:String,
       default:" "
     },
-    //  viewDetail:{
-    //   type:String,
-    //  } ,//{ type: mongoose.Schema.Types.ObjectId, ref: "servicerequest", default:" " },
+    viewDetail:
+    { type: mongoose.Schema.Types.ObjectId, ref: "servicerequest", default:" " },
   },
   { timestamps: true }
 );

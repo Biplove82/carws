@@ -11,16 +11,9 @@ const cctus= async function(req,res){
 
 const getcontactus=async function(req,res){
     try{
-       let contacts = await contactus.find().select('-_id');
-       let contactsObject = {};
-       contacts.forEach(contact => {
-        // Assuming each contact has a unique identifier, replace 'uniqueId' with the actual identifier
-        contactsObject[contact.uniqueId] = contact;
-    });
-
-
-       res.status(200).json({contacts: contactsObject})
-      
+       let contacts = await contactus.findOne().select('-_id');
+    
+           res.status(200).json({contacts }) 
 }catch(error){
     res.status(500).json(error);
 }

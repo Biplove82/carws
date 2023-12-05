@@ -4,8 +4,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
+const otpGenerator=require("otp-generator");
 
 const userRegister = async function (req, res) {
+  // generatedOTP = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+  // const generatedOTP=Math.floor(100000 + Math.random() * 900000);
+  //   console.log(generatedOTP);
+   
   try {
     const {
       userName,
@@ -16,11 +21,18 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
+      // otp
     } = req.body;
+
     const existingUser = await authmodels.findOne({ userName: userName });
     if (existingUser) {
       return res.status(401).json({ message: "Username already exists" });
     }
+    // if (otp !== generatedOTP) {
+    //   return res.status(401).json({ message: "Invalid OTP" });
+    // }//save ke pahele hoga
+    
+
     const hashedPassword = await bcrypt.hash(passWord, 10);
     const newUser = new authmodels({
       userName,
@@ -31,8 +43,12 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
+      // otp: generatedOTP
     });
+   
+    
     await newUser.save();
+   
     res
       .status(200)
       .json({ id: newUser._id, msg: "User Registered Succesfully" });
@@ -222,7 +238,7 @@ const login = async function (req, res) {
 
     let token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
-    res.json({ token });
+    res.json({ token, userId: user._id });
   } catch (error) {
     res.status(500).json({ error: "Invalid User" +error});
   }
