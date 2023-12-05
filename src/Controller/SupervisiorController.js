@@ -25,8 +25,8 @@ const getalluser = async function (req, res) {
 const getsinglesupervisorbyid = async function (req, res) {
   let id = req.params._id;
   try {
-    let user = await SupervisorModels.findById(id);
-    res.status(200).json({user});
+    let supervisior = await SupervisorModels.findById(id);
+    res.status(200).json({supervisior});
     
   } catch (error) {
     res.status(500).json({msg:"Intrnal server error"})
