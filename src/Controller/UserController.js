@@ -7,6 +7,8 @@ const CreateData = async function (req, res) {
   let savedData = await UserModels.create(Data);
   res.send({ msg: savedData });
 };
+
+
 //getUserData API
 const getUserData = async function (req, res) {
   let userId = req.params._id;
@@ -33,6 +35,8 @@ const updateUser = async function (req, res) {
     res.status(500).json({ msg: "error" });
   }
 };
+
+
 //service Request Api
 const serviceRqst = async function (req, res) {
   const {
@@ -76,6 +80,8 @@ const serviceRqst = async function (req, res) {
   }
 };
 
+
+
 //get Detail of Req Api
 const getReqbyId = async function (req, res) {
   let userId = req.params._id;
@@ -86,6 +92,10 @@ const getReqbyId = async function (req, res) {
     res.status(500).json({ msg: "Service Request not found" + err });
   }
 };
+
+
+
+
 //get all service add to db
 
 //Delete Api
@@ -102,6 +112,9 @@ const Delete = async function (req, res) {
   }
 };
 
+
+
+
 //api to submite feedBack
 const fedBack = async function (req, res) {
   const {
@@ -117,7 +130,6 @@ const fedBack = async function (req, res) {
     let fdback = new feedBackmodels({
       firstName,
       message,
-
       userName,
       surName,
       mobileNumber,
@@ -140,6 +152,9 @@ const getfedback = async function (req, res) {
     res.status(500).json({ msg: "error" });
   }
 };
+
+
+
 //api for complaint
 const compalint = async function (req, res) {
   try {

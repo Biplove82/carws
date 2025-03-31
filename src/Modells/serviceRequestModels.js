@@ -1,53 +1,41 @@
 const mongoose = require("mongoose");
 const serreqschema = new mongoose.Schema(
   {
-    firstName: { type: String, trim: true, default: " " },
-    surName: { type: String, trim: true, default: " " },
-
+    firstName: { type: String, trim: true },
+    surName: { type: String, trim: true },
     address: {
-      locality: { type: String, trim: true, default: " " },
-      city: { type: String, trim: true, default: " " },
-      district: { type: String, trim: true, default: " " },
-      state: { type: String, trim: true, default: " " },
-      pincode: { type: Number, trim: true, default: " " },
+      locality: { type: String, trim: true },
+      city: { type: String, trim: true },
+      district: { type: String, trim: true },
+      state: { type: String, trim: true },
+      pincode: { type: Number, trim: true },
     },
-    addedBy: {
-      type: String,
-      default: " ",
-    },
-
     userName: {
       type: String,
     },
-    passWord: {
-      type: String,
-    },
+
     mobileNumber: {
       type: Number,
-      default: 0,
     },
     status: {
       type: String,
-      default: " ",
     },
     serviceAt: {
       type: String,
-      default: "",
     },
     paymentMode: {
-      type: String,
-      default: " ",
+      type: mongoose.Schema.Types.ObjectId,ref:"transcation",
     },
     serviceType: {
-      type: String,
-      default: " ",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServicePlan",
     },
     PickUp_location: {
-      locality: { type: String, trim: true, default: " " },
-      city: { type: String, trim: true, default: " " },
-      district: { type: String, trim: true, default: " " },
-      state: { type: String, trim: true, default: " " },
-      pincode: { type: Number, default: " " },
+      locality: { type: String, trim: true },
+      city: { type: String, trim: true },
+      district: { type: String, trim: true },
+      state: { type: String, trim: true },
+      pincode: { type: Number },
     },
   },
   { timestamps: true }

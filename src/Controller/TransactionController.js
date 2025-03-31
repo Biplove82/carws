@@ -12,6 +12,9 @@ const transactionData = async function (req, res) {
     res.send({ msg: "Transation not created" });
   }
 };
+
+
+
 const getTransdetail = async function (req, res) {
   let pages = req.query.pages;
   try {
@@ -19,32 +22,34 @@ const getTransdetail = async function (req, res) {
       .find({
         paymentStatus: "sucessful",
       })
-      // .populate("viewDetail")
+      .populate("viewDetail")
 
-      // .skip(10 * (pages - 1))
-      // .limit(10);
+      .skip(10 * (pages - 1))
+      .limit(10);
     res.send({ msg: "sucessfull payment", service });
   } catch (error) {
     res.send({ msg: "Error" });
   }
 };
+
+
 const getunsucesspay = async function (req, res) {
-  // let pages = req.query.pages;
-  let userId = req.params._id;
+  let pages = req.query.pages;
+  
   try {
     let service = await transcModells.find({
       paymentStatus: "unsucessful",
-    });
-    // .populate("viewDetail")
-    // .skip(10* (pages - 1))
-    // .limit(10);
-    let viewdetail = await servicereq.findById({ userId });
-    let ans = { ...service, ...viewdetail };
-    res.send({ msg: "Unsuccessful Payment", ans });
+    })
+    .populate("viewDetail")
+    .skip(10* (pages - 1))
+    .limit(10);
+    res.send({ msg: "Unsuccessful Payment", service });
   } catch (error) {
     res.send({ msg: "Error" });
   }
 };
+
+
 
 const getTrans = async function (req, res) {
   // let pages=req.query.pages;
@@ -56,6 +61,9 @@ const getTrans = async function (req, res) {
     res.send({ msg: "Error" });
   }
 };
+
+
+
 const countsucessfulypay = async function (req, res) {
   let count = await transcModells.find({ paymentStatus: "sucessful" }).count();
   let countunsuc = await transcModells

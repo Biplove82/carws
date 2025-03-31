@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    firstName: { type: String, trim: true, default: " " },
-    surName: { type: String, trim: true, default: " " },
+    firstName: { type: String, trim: true },
+    surName: { type: String, trim: true },
 
     address: {
-      locality: { type: String, trim: true, default: " " },
-      city: { type: String, trim: true, default: " " },
-      district: { type: String, trim: true, default: " " },
-      state: { type: String, trim: true, default: " " },
-      pincode: { type: Number, trim: true, default: " " },
+      locality: { type: String, trim: true},
+      city: { type: String, trim: true },
+      district: { type: String, trim: true},
+      state: { type: String, trim: true },
+      pincode: { type: Number, trim: true },
     },
 
     userName: {
@@ -21,28 +21,25 @@ const UserSchema = new mongoose.Schema(
     },
     mobileNumber: {
       type: Number,
-      default: 0,
+  
     },
     status: {
       type: String,
-      default: " ",
+      
     },
     serviceAt: {
       type: String,
-      default: "",
+     
     },
 
     role: {
       type: Number,
       default: 3,
     },
-    description: {
-      type: String,
-    },
-
+   
     profileImage: {
       type: String,
-      default: " ",
+      
     },
 
     paymentMode: {
@@ -53,7 +50,7 @@ const UserSchema = new mongoose.Schema(
 
     otp: {
       type: String,
-      default: " ",
+     
     },
 
     isActive: {
@@ -62,15 +59,15 @@ const UserSchema = new mongoose.Schema(
     },
     alternateNumber: {
       type: Number,
-      default: " ",
+      
     },
 
     PickUp_location: {
-      locality: { type: String, trim: true, default: " " },
-      city: { type: String, trim: true, default: " " },
-      district: { type: String, trim: true, default: " " },
-      state: { type: String, trim: true, default: " " },
-      pincode: { type: Number, default: " " },
+      locality: { type: String, trim: true },
+      city: { type: String, trim: true},
+      district: { type: String, trim: true },
+      state: { type: String, trim: true},
+      pincode: { type: Number},
     },
   },
   { timestamps: true }

@@ -1,4 +1,7 @@
-const contactus=require("../Modells/ContactUSModels");
+const contactus = require("../Modells/ContactUSModels");
+
+
+
 const cctus= async function(req,res){
     try {
         let data=req.body;

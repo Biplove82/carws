@@ -4,10 +4,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const route = require("../src/routes/routes");
 const app = express();
-const bcrypt = require("bcrypt");
 const options = {
   origin: "*",
 };
+
 app.use(cors(options));
 
 app.use(bodyParser.json());
@@ -20,6 +20,7 @@ mongoose
       useNewUrlParser: true,
 
       useUnifiedTopology: true,
+       dbName: "carwash",
     }
   )
   .then(() => console.log("MongoDb is connected"))

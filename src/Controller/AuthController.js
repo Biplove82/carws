@@ -1,16 +1,12 @@
 const authmodels = require("../Modells/UserModels");
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const JWT_SECRET = "your-secret-key";
-const otpGenerator=require("otp-generator");
+
+
 
 const userRegister = async function (req, res) {
-  // generatedOTP = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-  // const generatedOTP=Math.floor(100000 + Math.random() * 900000);
-  //   console.log(generatedOTP);
-   
   try {
     const {
       userName,
@@ -21,18 +17,12 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
-      // otp
     } = req.body;
 
     const existingUser = await authmodels.findOne({ userName: userName });
     if (existingUser) {
       return res.status(401).json({ message: "Username already exists" });
     }
-    // if (otp !== generatedOTP) {
-    //   return res.status(401).json({ message: "Invalid OTP" });
-    // }//save ke pahele hoga
-    
-
     const hashedPassword = await bcrypt.hash(passWord, 10);
     const newUser = new authmodels({
       userName,
@@ -43,12 +33,9 @@ const userRegister = async function (req, res) {
       mobileNumber,
       alternateNumber,
       address,
-      // otp: generatedOTP
     });
-   
-    
+
     await newUser.save();
-   
     res
       .status(200)
       .json({ id: newUser._id, msg: "User Registered Succesfully" });
@@ -57,12 +44,13 @@ const userRegister = async function (req, res) {
   }
 };
 
-//user verification with otp
 
+
+//user verification with otp
 const sendotp = async function (req, res) {
   try {
     const { userName } = req.body;
-  
+
     const otp = Math.floor(100000 + Math.random() * 900000);
 
     var transport = nodemailer.createTransport({
@@ -94,6 +82,7 @@ const sendotp = async function (req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+
 
 
 //forgetpasswprd
@@ -140,6 +129,7 @@ const forgetpasswprd = async function (req, res) {
 };
 
 
+
 //resetpassowrd
 const resetpass = async function (req, res) {
   try {
@@ -151,11 +141,7 @@ const resetpass = async function (req, res) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.passWord = hashedPassword;
     user.otp = null;
-    // user.passWord = newPassword;
-    // user.otp = null;
-
-   let x= await user.save();
-console.log(x),
+    await user.save();
     res
       .status(200)
       .json({ success: true, message: "Password reset successful" });
@@ -164,31 +150,33 @@ console.log(x),
   }
 };
 
+
+
+
 //resend otp
 const resendOtp = async function (req, res) {
   try {
     const { userName } = req.body;
     const user = await authmodels.findOne({ userName });
-     if (!user) {
+    if (!user) {
       return res
         .status(400)
         .json({ success: false, message: "User not found" });
     }
     let otp = Math.floor(100000 + Math.random() * 900000);
     user.otp = otp;
-     let x=await user.save();
-    console.log(x);
+
+    await user.save();
+
     var transport = nodemailer.createTransport({
       service: "gmail",
-      // host: "sandbox.smtp.mailtrap.io",
-      // port: 2525,
-     auth: {
-        user: "biplavmandal.mandal@gmail.com", //"5baa42b75630c2",
-        pass: "abnj vnct roto spfn", //"7a0468f22aaaeb",
+      auth: {
+        user: "biplavmandal.mandal@gmail.com",
+        pass: "abnj vnct roto spfn",
       },
     });
     const info = await transport.sendMail({
-      from: '"Your Name" <biplavmandal.mandal@gmail.com>', 
+      from: '"Your Name" <biplavmandal.mandal@gmail.com>',
       to: userName,
       subject: "Email Verification OTP",
       text: `Your OTP for email verification is: ${otp}`,
@@ -209,8 +197,9 @@ const resendOtp = async function (req, res) {
 };
 
 
-//user registration with mobile number
 
+
+//user registration with mobile number
 const resbymobnum = async function (req, res) {
   try {
     let { mobileNumber, userName } = req.body;
@@ -227,6 +216,8 @@ const resbymobnum = async function (req, res) {
   }
 };
 
+
+
 //user login
 const login = async function (req, res) {
   let { userName, passWord } = req.body;
@@ -240,19 +231,23 @@ const login = async function (req, res) {
 
     res.json({ token, userId: user._id });
   } catch (error) {
-    res.status(500).json({ error: "Invalid User" +error});
+    res.status(500).json({ error: "Invalid User" + error });
   }
 };
-const getlogindata= async function(req,res){
-  let data =  req.params._id;
+
+
+
+const getlogindata = async function (req, res) {
+  let data = req.params._id;
   try {
     const loginDetail = await authmodels.findById(data).select("-passWord");
-    res.status(200).json({loginDetail});
-    } catch (error) {
-      res.status(500).json({msg: "Internal Server Error"});
-    
+    res.status(200).json({ loginDetail });
+  } catch (error) {
+    res.status(500).json({ msg: "Internal Server Error" });
   }
-}
+};
+
+
 
 module.exports = {
   userRegister,
@@ -263,5 +258,4 @@ module.exports = {
   resetpass,
   resendOtp,
   getlogindata,
-  
 };

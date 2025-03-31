@@ -1,29 +1,28 @@
 const mongoose = require("mongoose");
-//let ObjectId = mongoose.Types.ObjectId;
+
 const SupervisorSchema = new mongoose.Schema({
-  // first_name: { type: String, default: " " },
-  firstName: {
+    firstName: {
     type: String,
-    default: " ",
+   
   },
-  //surname: { type: String, default:" " },
+ 
   surName: {
     type: String,
-    default: " ",
+   
   },
   altenateNumber:{
     type :String ,
-    default:' ',
+   
   },
-  userName: { type: String, default: " " },
-  password: { type: String, default: " " },
+  userName: { type: String,  },
+  password: { type: String, },
   confirmPassword: {
     type: String,
-    default: " ",
+    
   },
   createUsername: {
     type: String,
-    default: " ",
+ 
   },
   role: {
     type: Number,
@@ -47,11 +46,11 @@ const SupervisorSchema = new mongoose.Schema({
   },
 
   address: {
-    locality: { type: String, trim: true, default: " " },
-    city: { type: String, trim: true, default: " " },
-    district: { type: String, trim: true, default: " " },
-    state: { type: String, trim: true, default: " " },
-    pincode: { type: Number, trim: true, default: " " },
+    locality: { type: String, trim: true },
+    city: { type: String, trim: true },
+    district: { type: String, trim: true },
+    state: { type: String, trim: true},
+    pincode: { type: Number, trim: true },
   },
 },{timestamps:true});
 module.exports = mongoose.model("supervisor", SupervisorSchema);

@@ -6,7 +6,7 @@ const adminmodel = require("../Modells/AdminModels");
 const create_admin = async function (req, res) {
   const { mobileNumber, userName } = req.body;
   try {
-    let existAdmin = await adminmodel.findOne({ mobileNumber });
+    let existAdmin = await adminmodel.find({ mobileNumber });
     if (existAdmin) {
       res.status(400).json({ msg: " Admin Already Exists" });
     }
@@ -17,6 +17,8 @@ const create_admin = async function (req, res) {
     res.status(500).json({ msg: "Failed to create admin" });
   }
 };
+
+
 
 //create supervisior
 const create_supervisior = async function (req, res) {
@@ -70,6 +72,8 @@ const allservicerequest = async function (req, res) {
     res.status(500).json({ msg: "User Detail Not Found" });
   }
 };
+
+
 // get supervisior
 const getsupevisior = async function (req, res) {
   let pages = req.query.pages;
@@ -117,7 +121,7 @@ const deleterequest = async function (req, res) {
 // Api for aproved dervice
 const approveservice = async function (req, res) {
   try {
-    let service = await usermodel.findOne({ status: "approved" });
+    let service = await usermodel.find({ status: "approved" });
     res.status(200).json(service);
   } catch (error) {
     res.status(500).json({ msg: "Service Not Found" });

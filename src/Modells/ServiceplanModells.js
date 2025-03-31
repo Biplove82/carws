@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 const serviceplanschema = new mongoose.Schema(
   {
-    ServiceType: { type: String, default: " " },
-    Amount: { type: String, default: " " },
+    serviceName: { type: String },
+  
+    brand: { type: String },
+    servicePlan:{type:String},
 
-    CardContent: [{
-      type: String,
-      default: " ",
-    }],
   },
   { timestamps: true }
 );

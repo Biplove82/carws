@@ -8,6 +8,8 @@ const data = async function (req, res) {
   let data1 = await SupervisorModels.create(d);
   res.send({ msg: data1 });
 };
+
+
 //api for all  service request user entery enter by user.
 const getalluser = async function (req, res) {
   let pages = req.query.pages;
@@ -21,6 +23,9 @@ const getalluser = async function (req, res) {
     res.status(500).json({ msg: "Data Not Found" });
   }
 };
+
+
+
 //get single supervisior by id
 const getsinglesupervisorbyid = async function (req, res) {
   let id = req.params._id;
@@ -48,6 +53,7 @@ const servicerequest = async function (req, res) {
     res.status(500).json({ msg: "User Detail Not Found" });
   }
 };
+
 
 //edit service request
 const editservicerequest = async function (req, res) {
@@ -106,6 +112,8 @@ const delete_request = async function (req, res) {
     res.status(500).json({ msg: "error" });
   }
 };
+
+
 //api for assigne service.
 const assigne_service = async function (req, res) {
   try {
